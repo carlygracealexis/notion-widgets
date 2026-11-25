@@ -1,66 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MY_PLANNER.EXE - Kawaii Y2K</title>
+  <title>MY PLANNER - Kawaii Y2K</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
   <style>
-    @import url('https://jsdelivr.net');
-    @import url('https://jsdelivr.net');
     :root {
-      --bg-grid: #fdfbff; --grid-line: #efe6ff; --ink: #3b3054; --shadow: #8c7aa9;
+      --bg-grid: #fdfbff; --grid-line: #efe6ff; --ink: #2b2140; --shadow: #8c7aa9;
       --pink: #ff85c0; --pink-soft: #ffc2e2; --lav: #c4b5fd; --blue: #93c5fd;
       --mint: #86efac; --yel: #fde047; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 8px; background: transparent; font-family: 'VT323', 'Courier New', monospace; font-size: 18px; color: var(--ink); }
-    .px { font-family: 'Press Start 2P', 'Courier New', monospace; letter-spacing: 0.5px; }
+    body {
+      margin: 0; padding: 8px; background: transparent;
+      font-family: 'VT323', 'Trebuchet MS', sans-serif;
+      font-size: 22px; color: var(--ink);
+    }
+    .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill {
+      font-family: 'Silkscreen', 'Courier New', monospace;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
     .planner-frame {
       max-width: 980px; margin: 0 auto; background-color: var(--bg-grid);
       background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 20px 20px; border: 2.5px solid var(--ink); border-radius: 14px;
-      box-shadow: 5px 5px 0px var(--shadow); padding: 14px; display: grid; grid-template-columns: 1fr 48px; gap: 10px;
+      box-shadow: 5px 5px 0px var(--shadow); padding: 14px; display: grid; grid-template-columns: 1fr 56px; gap: 10px;
     }
     .top-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 6px; }
     .nav-group { display: flex; flex-wrap: wrap; gap: 6px; }
-    .y2k-btn { font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.62rem; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 7px 10px; cursor: pointer; }
+    .y2k-btn { font-size: 13px; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 8px 12px; cursor: pointer; }
     .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--ink); }
     .y2k-btn.active { background: var(--pink); color: var(--white); }
-    .month-sidebar { display: flex; flex-direction: column; gap: 4px; }
-    .m-tab { font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.55rem; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0px var(--ink); padding: 9px 2px; text-align: center; cursor: pointer; user-select: none; }
+    .month-sidebar { display: flex; flex-direction: column; gap: 5px; }
+    .m-tab { font-size: 12px; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0px var(--ink); padding: 10px 2px; text-align: center; cursor: pointer; user-select: none; }
     .c-pink { background: var(--pink); } .c-pink-s { background: var(--pink-soft); } .c-lav { background: var(--lav); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yel); }
     .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0px var(--shadow); margin-bottom: 12px; }
-    .win-bar { padding: 6px 10px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.62rem; }
-    .win-icons { display: flex; gap: 3px; align-items: center; }
-    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: var(--white); border: 1.5px solid var(--ink); font-size: 0.6rem; color: var(--ink); }
-    .open-pill { background: var(--white); border: 1.5px solid var(--ink); padding: 2px 5px; font-size: 0.52rem; cursor: pointer; margin-right: 4px; }
-    .win-content { padding: 12px; }
+    .win-bar { padding: 8px 12px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+    .win-icons { display: flex; gap: 4px; align-items: center; }
+    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--white); border: 1.5px solid var(--ink); font-size: 11px; color: var(--ink); }
+    .open-pill { background: var(--white); border: 1.5px solid var(--ink); padding: 3px 7px; font-size: 11px; cursor: pointer; margin-right: 4px; }
+    .win-content { padding: 14px; }
     .screen { display: none; } .screen.active { display: block; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 10px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-    .tile-btn { font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.65rem; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 15px 8px; text-align: center; cursor: pointer; }
-    input[type="text"], textarea { width: 100%; border: 1.5px solid #d8b4fe; border-radius: 4px; padding: 4px 7px; font-family: 'VT323', 'Courier New', monospace; font-size: 1.15rem; color: var(--ink); background: transparent; }
-    textarea { resize: vertical; line-height: 24px; padding-top: 2px; }
-    .lined { background-image: repeating-linear-gradient(transparent, transparent 23px, #e9d5ff 24px); background-size: 100% 24px; border: none !important; }
+    .tile-btn { font-size: 14px; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 16px 8px; text-align: center; cursor: pointer; }
+    input[type="text"], textarea {
+      width: 100%; border: 1.5px solid #d8b4fe; border-radius: 4px; padding: 5px 8px;
+      font-family: 'VT323', 'Trebuchet MS', sans-serif;
+      font-size: 22px; color: var(--ink); background: transparent;
+    }
+    textarea { resize: vertical; line-height: 26px; padding-top: 2px; }
+    .lined { background-image: repeating-linear-gradient(transparent, transparent 25px, #e9d5ff 26px); background-size: 100% 26px; border: none !important; }
     .dotted { background-image: radial-gradient(#c4b5fd 1.2px, transparent 1.2px); background-size: 14px 14px; border: none !important; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-    .cal-head { font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 0.55rem; text-align: center; padding: 6px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
-    .cal-cell { min-height: 68px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 3px; display: flex; flex-direction: column; }
-    .cal-day-num { width: 32px !important; padding: 1px 3px !important; font-size: 0.9rem !important; border: 1px solid #e9d5ff !important; }
-    .cal-note { border: none !important; padding: 2px !important; font-size: 0.95rem !important; line-height: 16px; min-height: 40px; }
-    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 3px 0; }
-    .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--pink); flex-shrink: 0; }
+    .cal-head { font-size: 12px; text-align: center; padding: 7px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .cal-cell { min-height: 74px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 4px; display: flex; flex-direction: column; }
+    .cal-day-num { width: 38px !important; padding: 1px 4px !important; font-size: 18px !important; border: 1px solid #e9d5ff !important; }
+    .cal-note { border: none !important; padding: 2px !important; font-size: 18px !important; line-height: 18px; min-height: 42px; }
+    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 4px 0; }
+    .check-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--pink); flex-shrink: 0; }
     .check-item input[type="text"] { border: none; padding: 2px 4px; }
-    .water-box { width: 26px; height: 32px; border: 2px solid var(--ink); cursor: pointer; display: inline-block; background: var(--white); }
+    .water-box { width: 28px; height: 34px; border: 2px solid var(--ink); cursor: pointer; display: inline-block; background: var(--white); }
     .water-box.filled { background: var(--blue); }
-    .mood-btn { font-size: 1.3rem; padding: 4px 8px; border: 2px solid transparent; cursor: pointer; background: transparent; }
+    .mood-btn { font-size: 24px; padding: 4px 8px; border: 2px solid transparent; cursor: pointer; background: transparent; }
     .mood-btn.picked { border-color: var(--ink); background: var(--yel); border-radius: 6px; }
-    .px-table { width: 100%; border-collapse: collapse; font-size: 0.7rem; }
-    .px-table th, .px-table td { border: 1px solid #cbd5e1; text-align: center; height: 18px; padding: 1px; }
+    .px-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .px-table th, .px-table td { border: 1px solid #cbd5e1; text-align: center; height: 20px; padding: 2px; }
     .px-cell { cursor: pointer; }
   </style>
 </head>
+
 <body>
   <div class="planner-frame">
     <header class="top-nav">
