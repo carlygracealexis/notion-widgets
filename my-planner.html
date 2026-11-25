@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY_PLANNER.EXE - Soft Pastel Y2K</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-grid: #fdfbff;
+      --grid-line: #f1e8ff;
+      --ink: #4a3f5c;
+      --shadow-ink: #8b7aa8;
+      --pink: #f8b4d9;
+      --lavender: #d8b4fe;
+      --blue: #bae6fd;
+      --mint: #bbf7d0;
+      --yellow: #fef08a;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 8px;
+      background: transparent;
+      font-family: 'Quicksand', system-ui, sans-serif;
+      color: var(--ink);
+    }
+    .pixel { font-family: 'Silkscreen', cursive; }
+    .planner-frame {
+      max-width: 980px;
+      margin: 0 auto;
+      background-color: var(--bg-grid);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 22px 22px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 5px 5px 0px var(--shadow-ink);
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr 54px;
+      gap: 10px;
+    }
+    .top-nav {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .nav-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .y2k-btn {
+      font-family: 'Silkscreen', cursive;
+      font-size: 0.72rem;
+      background: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0px var(--ink);
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--ink); }
+    .y2k-btn.active { background: var(--pink); }
+    .month-sidebar { display: flex; flex-direction: column; gap: 5px; }
+    .m-tab {
+      font-family: 'Silkscreen', cursive;
+      font-size: 0.65rem;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 0 8px 8px 0;
+      box-shadow: 2px 2px 0px var(--ink);
+      padding: 8px 2px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .c-pink { background: var(--pink); }
+    .c-lav { background: var(--lavender); }
+    .c-blue { background: var(--blue); }
+    .c-mint { background: var(--mint); }
+    .c-yel { background: var(--yellow); }
+    .win-box {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      box-shadow: 4px 4px 0px var(--shadow-ink);
+      margin-bottom: 14px;
+    }
+    .win-bar {
+      padding: 5px 10px;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Silkscreen', cursive;
+      font-size: 0.72rem;
+    }
+    .win-icons { display: flex; gap: 3px; }
+    .win-icons span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      background: var(--white);
+      border: 1.5px solid var(--ink);
+      font-size: 0.6rem;
+    }
+    .win-content { padding: 14px; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .cover-center { text-align: center; padding: 28px 16px; }
+    .pixel-pets { font-family: 'Silkscreen', cursive; font-size: 1.1rem; letter-spacing: 4px; color: #c026d3; margin-bottom: 10px; }
+    .cover-title { font-family: 'Silkscreen', cursive; font-size: 2rem; line-height: 1.2; margin: 8px 0; text-shadow: 2px 2px 0px var(--lavender); }
+    .loading-bar { display: flex; gap: 3px; max-width: 360px; margin: 14px auto; padding: 4px; border: 2px solid var(--ink); background: var(--white); }
+    .loading-bar span { flex: 1; height: 12px; }
+    .belongs-box { max-width: 400px; margin: 16px auto; background: var(--white); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 12px; text-align: left; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .tile-btn { font-family: 'Silkscreen', cursive; font-size: 0.72rem; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 14px 8px; text-align: center; cursor: pointer; }
+    input[type="text"], textarea { width: 100%; border: 1.5px solid #d8b4fe; border-radius: 6px; padding: 6px 8px; font-family: 'Quicksand', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: rgba(255,255,255,0.9); }
+    textarea { resize: vertical; line-height: 1.5; }
+    .lined { background-image: linear-gradient(#f3e8ff 1px, transparent 1px); background-size: 100% 26px; }
+    .dotted { background-image: radial-gradient(#d8b4fe 1.2px, transparent 1.2px); background-size: 16px 16px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+    .cal-head { font-family: 'Silkscreen', cursive; font-size: 0.65rem; text-align: center; padding: 6px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .cal-cell { min-height: 68px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 4px; display: flex; flex-direction: column; gap: 3px; }
+    .cal-day-num { width: 34px !important; padding: 2px 4px !important; font-size: 0.72rem !important; border: 1px solid #e9d5ff !important; }
+    .cal-note { border: none !important; background: transparent !important; padding: 2px !important; font-size: 0.75rem !important; min-height: 38px; }
+    .check-item { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #f472b6; }
+  </style>
+</head>
+
+  <body>
+  <div class="planner-frame">
+    <header class="top-nav">
+      <div class="nav-group">
+        <button class="y2k-btn" onclick="showScreen('cover')">COVER</button>
+        <button class="y2k-btn active" id="nav-home" onclick="showScreen('home')">HOME</button>
+        <button class="y2k-btn" id="nav-year" onclick="showScreen('year')">YEAR</button>
+        <button class="y2k-btn" id="nav-week" onclick="showScreen('week')">WEEKLY</button>
+        <button class="y2k-btn" id="nav-notes" onclick="showScreen('notes')">NOTES</button>
+        <button class="y2k-btn" id="nav-extras" onclick="showScreen('extras')">EXTRAS</button>
+      </div>
+      <button class="y2k-btn c-mint" onclick="exportPage()">COPY FOR NOTION</button>
+    </header>
+    <main>
+      <section id="screen-cover" class="screen">
+        <div class="win-box">
+          <div class="win-bar c-pink"><span>MY_PLANNER.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content cover-center">
+            <div class="pixel-pets">(&#8226;&#969;&#8226;) &hearts; &#9733; &hearts; (&#9679;&#969;&#9679;)</div>
+            <div class="cover-title">DIGITAL<br>PLANNER</div>
+            <div class="pixel" style="font-size:0.75rem; color:#db2777;">* UNDATED * SOFT PASTEL Y2K *</div>
+            <div style="margin-top:16px; font-size:0.68rem;" class="pixel">LOADING CUTENESS... 100%</div>
+            <div class="loading-bar"><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span></div>
+            <div class="belongs-box"><label style="font-size:0.82rem; font-weight:700;">this planner belongs to:</label><input type="text" data-p="owner-name" placeholder="Type your name..." style="margin-top:6px;"></div>
+            <button class="y2k-btn c-yel" onclick="showScreen('home')">START &gt;</button>
+          </div>
+        </div>
+      </section>
+      <section id="screen-home" class="screen active">
+        <h2 class="pixel" style="margin:0 0 4px 0; font-size:1.3rem;">HOME &hearts;</h2>
+        <p style="margin:0 0 12px 0; font-size:0.85rem; color:var(--shadow-ink);">tap anything to jump there</p>
+        <div class="win-box">
+          <div class="win-bar c-pink"><span>MONTHS.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content grid-4" id="home-months-grid"></div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-blue"><span>SHORTCUTS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content grid-2">
+            <div class="tile-btn c-yel" onclick="showScreen('year')">YEAR AT A GLANCE</div>
+            <div class="tile-btn c-mint" onclick="showScreen('extras')">HABIT &amp; EXTRA TRACKERS</div>
+            <div class="tile-btn c-lav" onclick="showScreen('notes')">NOTES &amp; BRAIN DUMP</div>
+            <div class="tile-btn c-pink" onclick="showScreen('week')">THIS WEEK SPREAD</div>
+          </div>
+        </div>
+      </section>
+      <section id="screen-year" class="screen">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h2 class="pixel" style="margin:0; font-size:1.2rem;">YEAR AT A GLANCE &#9733;</h2>
+          <input type="text" data-p="year-label" placeholder="YEAR: 2026" style="max-width:160px;">
+        </div>
+        <div class="grid-3" id="year-grid"></div>
+      </section>
+      <section id="screen-month" class="screen">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <h2 class="pixel" id="month-heading" style="margin:0; font-size:1.25rem;">JANUARY &hearts;</h2>
+            <input type="text" id="month-year-input" placeholder="YEAR:" style="width:110px;">
+          </div>
+          <div style="display:flex; gap:5px; flex-wrap:wrap;">
+            <button class="y2k-btn c-pink" onclick="openWeek(1)">WEEK 1</button>
+            <button class="y2k-btn c-lav" onclick="openWeek(2)">WEEK 2</button>
+            <button class="y2k-btn c-blue" onclick="openWeek(3)">WEEK 3</button>
+            <button class="y2k-btn c-mint" onclick="openWeek(4)">WEEK 4</button>
+            <button class="y2k-btn c-yel" onclick="openWeek(5)">WEEK 5</button>
+          </div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-pink" id="month-cal-bar"><span>CALENDAR</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="cal-grid" id="month-calendar-cells"></div>
+        </div>
+        <div class="grid-2">
+          <div class="win-box"><div class="win-bar c-yel"><span>GOALS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="month-goals-list"></div></div>
+          <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="month-notes-area" class="dotted" style="min-height:195px;" placeholder="Monthly notes &amp; reminders..."></textarea></div></div>
+        </div>
+      </section>
+      <section id="screen-week" class="screen">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
+          <div><h2 class="pixel" id="week-heading" style="margin:0; font-size:1.2rem;">JANUARY &#9733;</h2><input type="text" id="week-range" placeholder="week 1 - __ / __ - __ / __" style="margin-top:4px; max-width:240px;"></div>
+          <div style="display:flex; gap:6px;"><button class="y2k-btn" onclick="showScreen('month')">&lt; MONTH</button><button class="y2k-btn" onclick="changeWeek(-1)">&lt; PREV</button><button class="y2k-btn" onclick="changeWeek(1)">NEXT &gt;</button></div>
+        </div>
+        <div class="grid-2" id="week-days-grid"></div>
+      </section>
+      <section id="screen-notes" class="screen">
+        <div class="win-box">
+          <div class="win-bar c-lav"><span>NOTES_&amp;_JOURNAL.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content"><input type="text" data-p="note-title" placeholder="Page Title / Date..." style="margin-bottom:10px; font-weight:700;"><textarea data-p="note-body" class="lined" style="min-height:330px;" placeholder="Write freely, brain dump sudden thoughts, or draft journal entries..."></textarea></div>
+        </div>
+      </section>
+      <section id="screen-extras" class="screen">
+        <div class="win-box">
+          <div class="win-bar c-mint"><span>EXTRAS_&amp;_TRACKERS.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content">
+            <p class="pixel" style="font-size:0.75rem; margin-top:0;">WEEKLY HABITS &amp; ROUTINES</p>
+            <div id="extras-habits"></div>
+            <p class="pixel" style="font-size:0.75rem; margin-top:16px;">LISTS / WISHLIST / IDEAS</p>
+            <textarea data-p="extras-list" class="dotted" style="min-height:150px;" placeholder="Track books, shows, budgets, or future ideas..."></textarea>
+          </div>
+        </div>
+      </section>
+    </main>
+    <aside class="month-sidebar" id="month-sidebar" aria-label="Months"></aside>
+  </div>
+  <script>
+    let currentMonth = 'JANUARY', currentColor = 'c-pink', currentWeek = 1;
+    const monthsList = [
+      ['JANUARY','c-pink'],['FEBRUARY','c-lav'],['MARCH','c-blue'],['APRIL','c-mint'],
+      ['MAY','c-yel'],['JUNE','c-pink'],['JULY','c-lav'],['AUGUST','c-blue'],
+      ['SEPTEMBER','c-mint'],['OCTOBER','c-yel'],['NOVEMBER','c-pink'],['DECEMBER','c-lav']
+    ];
+    const homeGrid = document.getElementById('home-months-grid');
+    const sideBar = document.getElementById('month-sidebar');
+    const yearGrid = document.getElementById('year-grid');
+    monthsList.forEach(([m, col]) => {
+      homeGrid.innerHTML += `<div class="tile-btn ${col}" onclick="openMonth('${m}','${col}')">${m}</div>`;
+      sideBar.innerHTML += `<div class="m-tab ${col}" onclick="openMonth('${m}','${col}')">${m.slice(0,3)}</div>`;
+      yearGrid.innerHTML += `<div class="win-box" style="margin-bottom:0; cursor:pointer;" onclick="openMonth('${m}','${col}')"><div class="win-bar ${col}"><span>${m}</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea data-p="yr-${m}" placeholder="Key dates..." style="min-height:70px; font-size:0.78rem; border:none;"></textarea></div></div>`;
+    });
+    const habitsDiv = document.getElementById('extras-habits');
+    for (let i = 1; i <= 5; i++) {
+      habitsDiv.innerHTML += `<div class="check-item"><input type="text" data-p="hab-name-${i}" placeholder="Habit #${i}..." style="max-width:220px;">${['M','T','W','T','F','S','S'].map((d, idx) => `<label style="font-size:0.75rem;"><input type="checkbox" data-p="hab-${i}-${idx}"> ${d}</label>`).join('')}</div>`;
+    }
+    function showScreen(name) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.top-nav .y2k-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('screen-' + name).classList.add('active');
+      const navBtn = document.getElementById('nav-' + name);
+      if (navBtn) navBtn.classList.add('active');
+    }
+    function openMonth(month, colorClass) {
+      currentMonth = month; currentColor = colorClass; showScreen('month');
+      document.getElementById('month-heading').innerHTML = `${month} &hearts;`;
+      document.getElementById('month-cal-bar').className = `win-bar ${colorClass}`;
+      bindField(document.getElementById('month-year-input'), `m-${month}-yr`);
+      bindField(document.getElementById('month-notes-area'), `m-${month}-notes`);
+      const cal = document.getElementById('month-calendar-cells');
+      cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(d => `<div class="cal-head">${d}</div>`).join('');
+      for (let i = 1; i <= 35; i++) cal.innerHTML += `<div class="cal-cell"><input type="text" class="cal-day-num" id="cnum-${i}" placeholder="#"><textarea class="cal-note" id="cnote-${i}"></textarea></div>`;
+      for (let i = 1; i <= 35; i++) { bindField(document.getElementById(`cnum-${i}`), `m-${month}-dnum-${i}`); bindField(document.getElementById(`cnote-${i}`), `m-${month}-dnote-${i}`); }
+      const goals = document.getElementById('month-goals-list');
+      goals.innerHTML = '';
+      for (let g = 1; g <= 6; g++) goals.innerHTML += `<div class="check-item"><input type="checkbox" id="mgc-${g}"><input type="text" id="mgt-${g}" placeholder="Goal ${g}..."></div>`;
+      for (let g = 1; g <= 6; g++) { bindField(document.getElementById(`mgc-${g}`), `m-${month}-gc-${g}`); bindField(document.getElementById(`mgt-${g}`), `m-${month}-gt-${g}`); }
+    }
+    function openWeek(wkNum) {
+      currentWeek = wkNum; showScreen('week');
+      document.getElementById('week-heading').innerHTML = `${currentMonth} &#9733;`;
+      const rangeEl = document.getElementById('week-range');
+      rangeEl.placeholder = `week ${wkNum} - __ / __ - __ / __`;
+      bindField(rangeEl, `w-${currentMonth}-${wkNum}-range`);
+      const days = [['SUNDAY','c-pink'],['MONDAY','c-lav'],['TUESDAY','c-blue'],['WEDNESDAY','c-mint'],['THURSDAY','c-yel'],['FRIDAY','c-pink'],['SATURDAY','c-lav']];
+      document.getElementById('week-days-grid').innerHTML = days.map(([day, col]) => `<div class="win-box" style="margin-bottom:0;"><div class="win-bar ${col}"><span>${day}</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:10px;"><textarea id="wk-${day}" class="lined" style="min-height:115px; border:none;" placeholder="Plans &amp; tasks..."></textarea></div></div>`).join('') + `<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:10px;" id="this-week-checks"></div></div>`;
+      days.forEach(([day]) => bindField(document.getElementById(`wk-${day}`), `w-${currentMonth}-${wkNum}-${day}`));
+      const tw = document.getElementById('this-week-checks');
+      for (let i = 1; i <= 4; i++) tw.innerHTML += `<div class="check-item"><input type="checkbox" id="twc-${i}"><input type="text" id="twt-${i}" placeholder="Weekly task..."></div>`;
+      for (let i = 1; i <= 4; i++) { bindField(document.getElementById(`twc-${i}`), `w-${currentMonth}-${wkNum}-twc-${i}`); bindField(document.getElementById(`twt-${i}`), `w-${currentMonth}-${wkNum}-twt-${i}`); }
+    }
+    function changeWeek(delta) { let next = currentWeek + delta; if (next < 1) next = 1; if (next > 5) next = 5; openWeek(next); }
+    function bindField(el, storageKey) {
+      const fullKey = 'y2k-soft-' + storageKey;
+      const saved = localStorage.getItem(fullKey);
+      if (el.type === 'checkbox') el.checked = saved === 'true';
+      else el.value = saved || '';
+      el.oninput = el.onchange = () => localStorage.setItem(fullKey, el.type === 'checkbox' ? el.checked : el.value);
+    }
+    document.querySelectorAll('[data-p]').forEach(el => bindField(el, el.dataset.p));
+    openMonth('NOVEMBER', 'c-pink');
+    showScreen('home');
+    function exportPage() {
+      const active = document.querySelector('.screen.active');
+      const lines = [];
+      active.querySelectorAll('input[type="text"], textarea').forEach(el => { if (el.value.trim()) lines.push(el.value.trim()); });
+      navigator.clipboard.writeText(lines.join('\n'));
+      alert('Copied your notes from this page! Ready to paste into Notion.');
+    }
+  </script>
+</body>
+</html>
