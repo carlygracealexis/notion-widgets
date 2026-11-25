@@ -3,133 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MY_PLANNER.EXE - Soft Pastel Y2K</title>
+  <title>MY PLANNER - Soft Pastel Y2K</title>
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-grid: #fdfbff;
-      --grid-line: #f1e8ff;
-      --ink: #4a3f5c;
-      --shadow-ink: #8b7aa8;
-      --pink: #f8b4d9;
-      --lavender: #d8b4fe;
-      --blue: #bae6fd;
-      --mint: #bbf7d0;
-      --yellow: #fef08a;
-      --white: #ffffff;
+      --bg-grid: #fdfbff; --grid-line: #f1e8ff; --ink: #4a3f5c; --shadow-ink: #8b7aa8;
+      --pink: #f8b4d9; --lavender: #d8b4fe; --blue: #bae6fd; --mint: #bbf7d0; --yellow: #fef08a; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 8px;
-      background: transparent;
-      font-family: 'Quicksand', system-ui, sans-serif;
-      color: var(--ink);
-    }
-    .pixel { font-family: 'Silkscreen', cursive; }
+    body { margin: 0; padding: 8px; background: transparent; font-family: 'Quicksand', 'Trebuchet MS', 'Segoe UI', sans-serif; color: var(--ink); }
+    .pixel { font-family: 'Silkscreen', 'Courier New', monospace; }
     .planner-frame {
-      max-width: 980px;
-      margin: 0 auto;
-      background-color: var(--bg-grid);
-      background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 22px 22px;
-      border: 2px solid var(--ink);
-      border-radius: 14px;
-      box-shadow: 5px 5px 0px var(--shadow-ink);
-      padding: 14px;
-      display: grid;
-      grid-template-columns: 1fr 54px;
-      gap: 10px;
+      max-width: 980px; margin: 0 auto; background-color: var(--bg-grid);
+      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 22px 22px; border: 2px solid var(--ink); border-radius: 14px;
+      box-shadow: 5px 5px 0px var(--shadow-ink); padding: 14px; display: grid; grid-template-columns: 1fr 54px; gap: 10px;
     }
-    .top-nav {
-      grid-column: 1 / -1;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
+    .top-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
     .nav-group { display: flex; flex-wrap: wrap; gap: 8px; }
-    .y2k-btn {
-      font-family: 'Silkscreen', cursive;
-      font-size: 0.72rem;
-      background: var(--white);
-      color: var(--ink);
-      border: 2px solid var(--ink);
-      box-shadow: 3px 3px 0px var(--ink);
-      padding: 6px 12px;
-      cursor: pointer;
-    }
+    .y2k-btn { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 0.72rem; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 6px 12px; cursor: pointer; }
     .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--ink); }
     .y2k-btn.active { background: var(--pink); }
     .month-sidebar { display: flex; flex-direction: column; gap: 5px; }
-    .m-tab {
-      font-family: 'Silkscreen', cursive;
-      font-size: 0.65rem;
-      color: var(--ink);
-      border: 2px solid var(--ink);
-      border-radius: 0 8px 8px 0;
-      box-shadow: 2px 2px 0px var(--ink);
-      padding: 8px 2px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-    }
-    .c-pink { background: var(--pink); }
-    .c-lav { background: var(--lavender); }
-    .c-blue { background: var(--blue); }
-    .c-mint { background: var(--mint); }
-    .c-yel { background: var(--yellow); }
-    .win-box {
-      background: var(--white);
-      border: 2px solid var(--ink);
-      box-shadow: 4px 4px 0px var(--shadow-ink);
-      margin-bottom: 14px;
-    }
-    .win-bar {
-      padding: 5px 10px;
-      border-bottom: 2px solid var(--ink);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Silkscreen', cursive;
-      font-size: 0.72rem;
-    }
+    .m-tab { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 0.65rem; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0px var(--ink); padding: 8px 2px; text-align: center; cursor: pointer; user-select: none; }
+    .c-pink { background: var(--pink); } .c-lav { background: var(--lavender); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yellow); }
+    .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0px var(--shadow-ink); margin-bottom: 14px; }
+    .win-bar { padding: 5px 10px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-family: 'Silkscreen', 'Courier New', monospace; font-size: 0.72rem; }
     .win-icons { display: flex; gap: 3px; }
-    .win-icons span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 14px;
-      height: 14px;
-      background: var(--white);
-      border: 1.5px solid var(--ink);
-      font-size: 0.6rem;
-    }
+    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: var(--white); border: 1.5px solid var(--ink); font-size: 0.6rem; }
     .win-content { padding: 14px; }
-    .screen { display: none; }
-    .screen.active { display: block; }
+    .screen { display: none; } .screen.active { display: block; }
     .cover-center { text-align: center; padding: 28px 16px; }
-    .pixel-pets { font-family: 'Silkscreen', cursive; font-size: 1.1rem; letter-spacing: 4px; color: #c026d3; margin-bottom: 10px; }
-    .cover-title { font-family: 'Silkscreen', cursive; font-size: 2rem; line-height: 1.2; margin: 8px 0; text-shadow: 2px 2px 0px var(--lavender); }
+    .pixel-pets { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 4px; color: #c026d3; margin-bottom: 10px; }
+    .cover-title { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 2rem; line-height: 1.2; margin: 8px 0; text-shadow: 2px 2px 0px var(--lavender); }
     .loading-bar { display: flex; gap: 3px; max-width: 360px; margin: 14px auto; padding: 4px; border: 2px solid var(--ink); background: var(--white); }
     .loading-bar span { flex: 1; height: 12px; }
     .belongs-box { max-width: 400px; margin: 16px auto; background: var(--white); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 12px; text-align: left; }
     .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-    .tile-btn { font-family: 'Silkscreen', cursive; font-size: 0.72rem; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 14px 8px; text-align: center; cursor: pointer; }
-    input[type="text"], textarea { width: 100%; border: 1.5px solid #d8b4fe; border-radius: 6px; padding: 6px 8px; font-family: 'Quicksand', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: rgba(255,255,255,0.9); }
+    .tile-btn { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 0.72rem; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 14px 8px; text-align: center; cursor: pointer; }
+    input[type="text"], textarea { width: 100%; border: 1.5px solid #d8b4fe; border-radius: 6px; padding: 6px 8px; font-family: 'Quicksand', 'Trebuchet MS', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: rgba(255,255,255,0.9); }
     textarea { resize: vertical; line-height: 1.5; }
     .lined { background-image: linear-gradient(#f3e8ff 1px, transparent 1px); background-size: 100% 26px; }
     .dotted { background-image: radial-gradient(#d8b4fe 1.2px, transparent 1.2px); background-size: 16px 16px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-    .cal-head { font-family: 'Silkscreen', cursive; font-size: 0.65rem; text-align: center; padding: 6px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .cal-head { font-family: 'Silkscreen', 'Courier New', monospace; font-size: 0.65rem; text-align: center; padding: 6px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
     .cal-cell { min-height: 68px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 4px; display: flex; flex-direction: column; gap: 3px; }
     .cal-day-num { width: 34px !important; padding: 2px 4px !important; font-size: 0.72rem !important; border: 1px solid #e9d5ff !important; }
     .cal-note { border: none !important; background: transparent !important; padding: 2px !important; font-size: 0.75rem !important; min-height: 38px; }
@@ -137,8 +58,7 @@
     .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: #f472b6; }
   </style>
 </head>
-
-  <body>
+<body>
   <div class="planner-frame">
     <header class="top-nav">
       <div class="nav-group">
@@ -154,7 +74,7 @@
     <main>
       <section id="screen-cover" class="screen">
         <div class="win-box">
-          <div class="win-bar c-pink"><span>MY_PLANNER.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-bar c-pink"><span>MY PLANNER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
           <div class="win-content cover-center">
             <div class="pixel-pets">(&#8226;&#969;&#8226;) &hearts; &#9733; &hearts; (&#9679;&#969;&#9679;)</div>
             <div class="cover-title">DIGITAL<br>PLANNER</div>
@@ -222,13 +142,13 @@
       </section>
       <section id="screen-notes" class="screen">
         <div class="win-box">
-          <div class="win-bar c-lav"><span>NOTES_&amp;_JOURNAL</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-bar c-lav"><span>NOTES &amp; JOURNAL</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
           <div class="win-content"><input type="text" data-p="note-title" placeholder="Page Title / Date..." style="margin-bottom:10px; font-weight:700;"><textarea data-p="note-body" class="lined" style="min-height:330px;" placeholder="Write freely, brain dump sudden thoughts, or draft journal entries..."></textarea></div>
         </div>
       </section>
       <section id="screen-extras" class="screen">
         <div class="win-box">
-          <div class="win-bar c-mint"><span>EXTRAS_&amp;_TRACKERS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-bar c-mint"><span>EXTRAS &amp; TRACKERS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
           <div class="win-content">
             <p class="pixel" style="font-size:0.75rem; margin-top:0;">WEEKLY HABITS &amp; ROUTINES</p>
             <div id="extras-habits"></div>
@@ -241,7 +161,6 @@
     <aside class="month-sidebar" id="month-sidebar" aria-label="Months"></aside>
   </div>
   <script>
-      <script>
     const DB_URL = 'https://firebaseio.com';
     let currentMonth = 'JANUARY', currentColor = 'c-pink', currentWeek = 1;
     let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
