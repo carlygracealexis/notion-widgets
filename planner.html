@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Study RPG - Daily Quest Log</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-sakura: #fdf2f8;
+      --card-parchment: #fffaf0;
+      --border-wood: #5c3a21;
+      --accent-pink: #f472b6;
+      --accent-lavender: #c084fc;
+      --accent-mint: #6ee7b7;
+      --accent-gold: #fcd34d;
+      --text-dark: #3b2314;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: transparent;
+      color: var(--text-dark);
+      margin: 0;
+      padding: 12px;
+    }
+
+    h1, h2, .pixel-font {
+      font-family: 'Silkscreen', cursive;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .quest-header {
+      background: linear-gradient(135deg, #fce7f3, #ede9fe);
+      border: 3px solid var(--border-wood);
+      box-shadow: 4px 4px 0px var(--border-wood);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quest-header h1 {
+      font-size: 1.15rem;
+      margin: 0;
+      color: var(--text-dark);
+    }
+
+    .date-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    input[type="date"], input[type="text"], textarea {
+      font-family: inherit;
+      border: 2px solid var(--border-wood);
+      border-radius: 6px;
+      padding: 6px 10px;
+      background: #ffffff;
+      color: var(--text-dark);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    section, article {
+      background: var(--card-parchment);
+      border: 3px solid var(--border-wood);
+      box-shadow: 4px 4px 0px var(--border-wood);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    section h2, article h2 {
+      font-size: 0.95rem;
+      margin: 0 0 12px 0;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 2px solid var(--border-wood);
+      display: inline-block;
+    }
+
+    .badge-study { background: #fbcfe8; }
+    .badge-pray { background: #ddd6fe; }
+    .badge-reflect { background: #fef08a; }
+    .badge-obey { background: #bbf7d0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-pink);
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 95px;
+      resize: vertical;
+      margin-top: 6px;
+    }
+
+    .scripture-input {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .footer-actions {
+      margin-top: 14px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    button {
+      font-family: 'Silkscreen', cursive;
+      font-size: 0.75rem;
+      background: #fbcfe8;
+      color: var(--text-dark);
+      border: 2px solid var(--border-wood);
+      box-shadow: 2px 2px 0px var(--border-wood);
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="quest-header">
+      <h1>Daily Quest Log</h1>
+      <div class="date-bar">
+        <label for="quest-date" class="pixel-font">Date:</label>
+        <input type="date" id="quest-date" data-save="quest-date">
+      </div>
+    </header>
+
+    <div class="grid">
+      <section aria-labelledby="study-heading">
+        <h2 id="study-heading" class="badge-study">Study</h2>
+        <label for="passage" class="pixel-font" style="font-size: 0.75rem;">Today's Passage:</label>
+        <input type="text" id="passage" class="scripture-input" placeholder="e.g., Psalm 23:1-6" data-save="passage">
+        <ul>
+          <li><input type="checkbox" id="q1" data-save="q1"> <label for="q1">Read chapter &amp; context</label></li>
+          <li><input type="checkbox" id="q2" data-save="q2"> <label for="q2">Highlight key verse</label></li>
+          <li><input type="checkbox" id="q3" data-save="q3"> <label for="q3">Cross-reference notes</label></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="pray-heading">
+        <h2 id="pray-heading" class="badge-pray">Pray &amp; Grow</h2>
+        <ul>
+          <li><input type="checkbox" id="p1" data-save="p1"> <label for="p1">Adoration &amp; Thanksgiving</label></li>
+          <li><input type="checkbox" id="p2" data-save="p2"> <label for="p2">Confession &amp; Renewal</label></li>
+          <li><input type="checkbox" id="p3" data-save="p3"> <label for="p3">Supplication &amp; Intercession</label></li>
+          <li><input type="checkbox" id="p4" data-save="p4"> <label for="p4">Memorize weekly verse</label></li>
+        </ul>
+      </section>
+
+      <article aria-labelledby="reflect-heading">
+        <h2 id="reflect-heading" class="badge-reflect">Reflect</h2>
+        <label for="reflection-notes" style="font-size: 0.85rem;">What is God teaching you today?</label>
+        <textarea id="reflection-notes" placeholder="Write your heart takeaways..." data-save="reflection-notes"></textarea>
+      </article>
+
+      <article aria-labelledby="obey-heading">
+        <h2 id="obey-heading" class="badge-obey">Obey &amp; Share</h2>
+        <label for="action-notes" style="font-size: 0.85rem;">One step of obedience or someone to encourage:</label>
+        <textarea id="action-notes" placeholder="Action step or prayer request to share..." data-save="action-notes"></textarea>
+      </article>
+    </div>
+
+    <div class="footer-actions">
+      <button type="button" id="reset-btn">New Day Reset</button>
+    </div>
+  </main>
+
+  <script>
+    const saveFields = document.querySelectorAll('[data-save]');
+    saveFields.forEach(field => {
+      const key = 'bible-rpg-' + field.dataset.save;
+      const saved = localStorage.getItem(key);
+      if (saved !== null) {
+        if (field.type === 'checkbox') {
+          field.checked = saved === 'true';
+        } else {
+          field.value = saved;
+        }
+      }
+      field.addEventListener('input', () => {
+        const val = field.type === 'checkbox' ? field.checked : field.value;
+        localStorage.setItem(key, val);
+      });
+      field.addEventListener('change', () => {
+        const val = field.type === 'checkbox' ? field.checked : field.value;
+        localStorage.setItem(key, val);
+      });
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      saveFields.forEach(field => {
+        localStorage.removeItem('bible-rpg-' + field.dataset.save);
+        if (field.type === 'checkbox') field.checked = false;
+        else field.value = '';
+      });
+    });
+  </script>
+</body>
+</html>
