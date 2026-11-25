@@ -241,7 +241,10 @@
     <aside class="month-sidebar" id="month-sidebar" aria-label="Months"></aside>
   </div>
   <script>
+      <script>
+    const DB_URL = 'https://firebaseio.com';
     let currentMonth = 'JANUARY', currentColor = 'c-pink', currentWeek = 1;
+    let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
     const monthsList = [
       ['JANUARY','c-pink'],['FEBRUARY','c-lav'],['MARCH','c-blue'],['APRIL','c-mint'],
       ['MAY','c-yel'],['JUNE','c-pink'],['JULY','c-lav'],['AUGUST','c-blue'],
@@ -259,6 +262,14 @@
     for (let i = 1; i <= 5; i++) {
       habitsDiv.innerHTML += `<div class="check-item"><input type="text" data-p="hab-name-${i}" placeholder="Habit #${i}..." style="max-width:220px;">${['M','T','W','T','F','S','S'].map((d, idx) => `<label style="font-size:0.75rem;"><input type="checkbox" data-p="hab-${i}-${idx}"> ${d}</label>`).join('')}</div>`;
     }
+    const lockBtn = document.createElement('button');
+    lockBtn.className = 'y2k-btn c-yel';
+    lockBtn.textContent = editPin ? 'EDIT UNLOCKED' : 'UNLOCK EDIT';
+    lockBtn.onclick = () => {
+      const p = prompt('Enter your secret PIN to enable cloud saving:', editPin);
+      if (p !== null) { editPin = p.trim(); localStorage.setItem('ccbg-edit-pin', editPin); lockBtn.textContent = editPin ? 'EDIT UNLOCKED' : 'UNLOCK EDIT'; pushCloud(); }
+    };
+    document.querySelector('.top-nav').appendChild(lockBtn);
     function showScreen(name) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.top-nav .y2k-btn').forEach(b => b.classList.remove('active'));
@@ -296,15 +307,31 @@
     }
     function changeWeek(delta) { let next = currentWeek + delta; if (next < 1) next = 1; if (next > 5) next = 5; openWeek(next); }
     function bindField(el, storageKey) {
-      const fullKey = 'y2k-soft-' + storageKey;
-      const saved = localStorage.getItem(fullKey);
-      if (el.type === 'checkbox') el.checked = saved === 'true';
-      else el.value = saved || '';
-      el.oninput = el.onchange = () => localStorage.setItem(fullKey, el.type === 'checkbox' ? el.checked : el.value);
+      el.dataset.ckey = storageKey;
+      const val = cloudData[storageKey];
+      if (el.type === 'checkbox') el.checked = val === true;
+      else el.value = val || '';
+      el.oninput = el.onchange = () => {
+        cloudData[storageKey] = el.type === 'checkbox' ? el.checked : el.value;
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(pushCloud, 600);
+      };
+    }
+    async function pushCloud() {
+      if (!editPin) return;
+      const payload = Object.assign({}, cloudData, { _pin: editPin });
+      const res = await fetch(DB_URL, { method: 'PUT', body: JSON.stringify(payload) });
+      if (!res.ok) alert('Wrong PIN! Click UNLOCK EDIT and enter your Firebase Rules PIN.');
+    }
+    async function loadCloud() {
+      const res = await fetch(DB_URL);
+      const data = await res.json();
+      if (data) { cloudData = data; document.querySelectorAll('[data-ckey]').forEach(el => bindField(el, el.dataset.ckey)); }
     }
     document.querySelectorAll('[data-p]').forEach(el => bindField(el, el.dataset.p));
     openMonth('NOVEMBER', 'c-pink');
     showScreen('home');
+    loadCloud();
     function exportPage() {
       const active = document.querySelector('.screen.active');
       const lines = [];
