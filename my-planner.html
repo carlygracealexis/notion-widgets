@@ -247,6 +247,43 @@
     const pxt = document.getElementById('pixels-table');
     pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x.split('|').shift().slice(0,3) + '</th>'; }).join('') + '</tr>';
     for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x.split('|').shift() + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
+    function cyclePx(td) { const k = td.dataset.px; const n = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = n; td.style.background = pxColors[n]; queueSave(); }
+    const expDiv = document.getElementById('expense-rows');
+    for (let r = 1; r <= 8; r++) expDiv.innerHTML += '<div style="display:grid; grid-template-columns:1fr 2fr 1fr 1fr; gap:6px; margin-bottom:4px;"><input type="text" data-p="ex-d-' + r + '" placeholder="DATE"><input type="text" data-p="ex-i-' + r + '" placeholder="ITEM"><input type="text" data-p="ex-c-' + r + '" placeholder="CATEGORY"><input type="text" data-p="ex-a-' + r + '" placeholder="$0.00"></div>';
+    const myIcons = ['Kawaii Folder- blue.png','Kawaii Folder- blush.png','Kawaii Folder- mocha.png','Kawaii Folder- orange.png','Kawaii Folder- vanilla.png','Kawaii icon- blsh notebook.png','Kawaii icon- blue bow.png','Kawaii icon- blue notebook.png','Kawaii icon- bubble tea.png','Kawaii icon- dk blue bow.png','Kawaii icon- dk navy bow.png','Kawaii icon- drk blue notebook.png','Kawaii icon- emerald bow.png','Kawaii icon- flower.png','Kawaii icon- gameboy.png','Kawaii icon- gold bow.png','Kawaii icon- grape bubble tea.png','Kawaii icon- green bow.png','Kawaii icon- green notebook.png','Kawaii icon- purple bow.png','Kawaii icon- sparkles.png','Kawaii icon- strawberrybubble tea.png','Y2K_sticker_22.png','Y2K_sticker_27.png','Y2K_sticker_30.png','Y2K_sticker_33.png','Y2K_sticker_38.png','Y2K_sticker_39.png','Y2K_sticker_40.png','Y2K_sticker_47.png','Y2K_sticker_camera.png','Y2K_sticker_casette.png','Y2K_sticker_cd.png','Y2K_sticker_flip_phone.png','Y2K_sticker_gaming_headset.png','Y2K_sticker_GIRL.png','Y2K_sticker_heart.png','Y2K_sticker_kawaii.png','Y2K_sticker_panda.png','Y2K_sticker_penguin.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_super_cute.png','Y2K_sticker_Y2K.png'];
+    const sGrid = document.getElementById('sticker-grid');
+    myIcons.forEach(function(f) { const tag = '<img src="./' + encodeURI(f) + '" style="width:52px; height:52px; object-fit:contain; pointer-events:none;">'; const d = document.createElement('div'); d.className = 'sticker-item'; d.innerHTML = tag; d.onclick = function() { addSticker(tag, 140, 140, true); }; sGrid.appendChild(d); });
+    function addSticker(html, x, y, save) {
+      const s = document.createElement('div'); s.className = 'placed-sticker'; s.innerHTML = html; s.style.left = x + 'px'; s.style.top = y + 'px';
+      s.onmousedown = function(e) { const ox = e.clientX - s.offsetLeft, oy = e.clientY - s.offsetTop; document.onmousemove = function(ev) { s.style.left = (ev.clientX - ox) + 'px'; s.style.top = (ev.clientY - oy) + 'px'; }; document.onmouseup = function() { document.onmousemove = null; saveStickers(); }; };
+      s.ondblclick = function() { s.remove(); saveStickers(); };
+      document.body.appendChild(s); if (save) saveStickers();
+    }
+    function saveStickers() { cloudData._stickers = Array.from(document.querySelectorAll('.placed-sticker')).map(function(s) { return { h: s.innerHTML, x: parseInt(s.style.left), y: parseInt(s.style.top) }; }); queueSave(); }
+    function setPaper(type) {
+      const pad = document.getElementById('notes-pad'); pad.className = type === 'blank' ? '' : type;
+      document.getElementById('notes-bar-title').textContent = type.toUpperCase() + '.TXT';
+      ['lined','dotted','gridded','blank'].forEach(function(t) { document.getElementById('pt-' + t).classList.toggle('c-pink', t === type); });
+    }
+    function showScreen(name) {
+      document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.top-nav .y2k-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('screen-' + name).classList.add('active');
+      const nb = document.getElementById('nav-' + name); if (nb) nb.classList.add('active');
+    }
+    function openMonth(month, col) {
+      currentMonth = month; showScreen('month');
+      document.getElementById('month-heading').innerHTML = month + ' <img src="./Kawaii%20icon-%20blsh%20notebook.png" style="width:24px; vertical-align:middle;">';
+      document.getElementById('month-cal-bar').className = 'win-bar ' + col;
+      bindField(document.getElementById('month-year-input'), 'm-' + month + '-yr');
+      bindField(document.getElementById('month-notes-area'), 'm-' + month + '-notes');
+      const cal = document.getElementById('month-calendar-cells');
+      cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(function(d) { return '<div class="cal-head">' + d + '</div>'; }).join('');
+      for (let i = 1; i <= 35; i++) cal.innerHTML += '<div class="cal-cell"><input type="text" class="cal-day-num" id="cnum-' + i + '"><textarea class="cal-note" id="cnote-' + i + '"></textarea></div>';
+      for (let i = 1; i <= 35; i++) { bindField(document.getElementById('cnum-' + i), 'm-' + month + '-dn-' + i); bindField(document.getElementById('cnote-' + i), 'm-' + month + '-dt-' + i); }
+      const goals = document.getElementById('month-goals-list'); goals.innerHTML = '';
+      for (let g = 1; g <= 7; g++) goals.innerHTML += '<div class="check-item"><input type="checkbox" id="mgc-' + g + '"><input type="text" id="mgt-' + g + '"></div>';
+      for (let g = 1; g <= 7; g++) { bindField(document.getElementById('mgc-' + g), 'm-' + month + '-gc-' + g); bindField(document.getElementById('mgt-' + g), 'm-' + month + '-gt-' + g); }
     }
         function openWeek(wk) {
       currentWeek = wk; showScreen('week');
