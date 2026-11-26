@@ -1,82 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MY PLANNER - Kawaii Y2K</title>
+  <title>MY_PLANNER.EXE</title>
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-grid: #fdfbff; --grid-line: #efe6ff; --ink: #2b2140; --shadow: #8c7aa9;
-      --pink: #ff85c0; --pink-soft: #ffc2e2; --lav: #c4b5fd; --blue: #93c5fd;
-      --mint: #86efac; --yel: #fde047; --white: #ffffff;
+      --bg: #fdfbff; --grid: #efe6ff; --ink: #35294c; --sh: #8c7aa9;
+      --pink: #ff7eb9; --pink-s: #ffb8dc; --lav: #c3b1ff; --blue: #8ecae6;
+      --mint: #8ce99a; --yel: #ffe066; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 8px; background: transparent;
-      font-family: 'VT323', 'Trebuchet MS', sans-serif;
-      font-size: 22px; color: var(--ink);
-    }
-    .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill {
-      font-family: 'Silkscreen', 'Courier New', monospace;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-    }
+    body { margin: 0; padding: 8px; background: transparent; font-family: 'VT323', monospace; font-size: 20px; color: var(--ink); }
+    .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill { font-family: 'Press Start 2P', monospace; letter-spacing: 0.4px; }
     .planner-frame {
-      max-width: 980px; margin: 0 auto; background-color: var(--bg-grid);
-      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 20px 20px; border: 2.5px solid var(--ink); border-radius: 14px;
-      box-shadow: 5px 5px 0px var(--shadow); padding: 14px; display: grid; grid-template-columns: 1fr 56px; gap: 10px;
+      max-width: 960px; margin: 0 auto; background-color: var(--bg);
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 18px 18px; border: 2.5px solid var(--ink); border-radius: 12px;
+      box-shadow: 5px 5px 0 var(--sh); padding: 14px; display: grid; grid-template-columns: 1fr 48px; gap: 10px; position: relative;
     }
     .top-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 6px; }
     .nav-group { display: flex; flex-wrap: wrap; gap: 6px; }
-    .y2k-btn { font-size: 13px; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 8px 12px; cursor: pointer; }
-    .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--ink); }
+    .y2k-btn { font-size: 10px; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 8px 11px; cursor: pointer; }
+    .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
     .y2k-btn.active { background: var(--pink); color: var(--white); }
-    .month-sidebar { display: flex; flex-direction: column; gap: 5px; }
-    .m-tab { font-size: 12px; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0px var(--ink); padding: 10px 2px; text-align: center; cursor: pointer; user-select: none; }
-    .c-pink { background: var(--pink); } .c-pink-s { background: var(--pink-soft); } .c-lav { background: var(--lav); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yel); }
-    .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0px var(--shadow); margin-bottom: 12px; }
-    .win-bar { padding: 8px 12px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-    .win-icons { display: flex; gap: 4px; align-items: center; }
-    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--white); border: 1.5px solid var(--ink); font-size: 11px; color: var(--ink); }
-    .open-pill { background: var(--white); border: 1.5px solid var(--ink); padding: 3px 7px; font-size: 11px; cursor: pointer; margin-right: 4px; }
-    .win-content { padding: 14px; }
+    .month-sidebar { display: flex; flex-direction: column; gap: 4px; }
+    .m-tab { font-size: 9px; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0 var(--ink); padding: 9px 2px; text-align: center; cursor: pointer; user-select: none; }
+    .c-pink { background: var(--pink); } .c-pink-s { background: var(--pink-s); } .c-lav { background: var(--lav); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yel); }
+    .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--sh); margin-bottom: 12px; }
+    .win-bar { padding: 7px 10px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 10px; }
+    .win-icons { display: flex; gap: 3px; align-items: center; }
+    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: var(--white); border: 1.5px solid var(--ink); font-size: 8px; }
+    .open-pill { background: var(--white); border: 1.5px solid var(--ink); padding: 3px 6px; font-size: 8px; cursor: pointer; margin-right: 4px; }
+    .win-content { padding: 12px; }
     .screen { display: none; } .screen.active { display: block; }
     .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-    .tile-btn { font-size: 14px; border: 2px solid var(--ink); box-shadow: 3px 3px 0px var(--ink); padding: 16px 8px; text-align: center; cursor: pointer; }
-    input[type="text"], textarea {
-      width: 100%; border: 1.5px solid #d8b4fe; border-radius: 4px; padding: 5px 8px;
-      font-family: 'VT323', 'Trebuchet MS', sans-serif;
-      font-size: 22px; color: var(--ink); background: transparent;
-    }
-    textarea { resize: vertical; line-height: 26px; padding-top: 2px; }
-    .lined { background-image: repeating-linear-gradient(transparent, transparent 25px, #e9d5ff 26px); background-size: 100% 26px; border: none !important; }
-    .dotted { background-image: radial-gradient(#c4b5fd 1.2px, transparent 1.2px); background-size: 14px 14px; border: none !important; }
+    .tile-btn { font-size: 10px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 16px 8px; text-align: center; cursor: pointer; }
+    input[type="text"], textarea { width: 100%; border: none; border-bottom: 1.5px solid #d8b4fe; padding: 3px 6px; font-family: 'VT323', monospace; font-size: 20px; color: var(--ink); background: transparent; }
+    textarea { resize: vertical; line-height: 24px; border-bottom: none; }
+    .lined { background-image: repeating-linear-gradient(transparent, transparent 23px, #e9d5ff 24px); background-size: 100% 24px; }
+    .dotted { background-image: radial-gradient(#c3b1ff 1.3px, transparent 1.3px); background-size: 14px 14px; }
+    .gridded { background-image: linear-gradient(#efe6ff 1px, transparent 1px), linear-gradient(90deg, #efe6ff 1px, transparent 1px); background-size: 18px 18px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-    .cal-head { font-size: 12px; text-align: center; padding: 7px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
-    .cal-cell { min-height: 74px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 4px; display: flex; flex-direction: column; }
-    .cal-day-num { width: 38px !important; padding: 1px 4px !important; font-size: 18px !important; border: 1px solid #e9d5ff !important; }
-    .cal-note { border: none !important; padding: 2px !important; font-size: 18px !important; line-height: 18px; min-height: 42px; }
-    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 4px 0; }
-    .check-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--pink); flex-shrink: 0; }
-    .check-item input[type="text"] { border: none; padding: 2px 4px; }
-    .water-box { width: 28px; height: 34px; border: 2px solid var(--ink); cursor: pointer; display: inline-block; background: var(--white); }
+    .cal-head { font-size: 9px; text-align: center; padding: 7px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .cal-cell { min-height: 70px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 3px; display: flex; flex-direction: column; }
+    .cal-day-num { width: 28px !important; height: 22px !important; padding: 1px 3px !important; font-size: 16px !important; border: 1.5px solid var(--ink) !important; text-align: center; }
+    .cal-note { padding: 2px !important; font-size: 17px !important; line-height: 17px; min-height: 40px; }
+    .mini-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-size: 11px; }
+    .mini-box { border: 1px solid #cbd5e1; height: 18px; font-size: 13px; padding: 0; text-align: center; }
+    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 3px 0; }
+    .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--pink); flex-shrink: 0; }
+    .load-bar { display: flex; gap: 2px; max-width: 340px; margin: 12px auto 18px; padding: 3px; border: 2px solid var(--ink); background: var(--white); }
+    .load-bar span { flex: 1; height: 11px; }
+    .water-box { width: 26px; height: 32px; border: 2px solid var(--ink); cursor: pointer; background: var(--white); }
     .water-box.filled { background: var(--blue); }
-    .mood-btn { font-size: 24px; padding: 4px 8px; border: 2px solid transparent; cursor: pointer; background: transparent; }
-    .mood-btn.picked { border-color: var(--ink); background: var(--yel); border-radius: 6px; }
-    .px-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .px-table th, .px-table td { border: 1px solid #cbd5e1; text-align: center; height: 20px; padding: 2px; }
-    .px-cell { cursor: pointer; }
+    .mood-btn { padding: 4px 6px; border: 2px solid transparent; cursor: pointer; background: transparent; border-radius: 6px; }
+    .mood-btn.picked { border-color: var(--ink); background: var(--yel); }
+    .px-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .px-table th, .px-table td { border: 1px solid #cbd5e1; text-align: center; height: 18px; padding: 1px; cursor: pointer; }
+    .sticker-item { font-size: 36px; padding: 12px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--sh); text-align: center; cursor: pointer; background: var(--white); }
+    .placed-sticker { position: fixed; font-size: 34px; cursor: move; user-select: none; z-index: 50; filter: drop-shadow(2px 2px 0 #35294c); }
   </style>
 </head>
-
 <body>
   <div class="planner-frame">
     <header class="top-nav">
@@ -84,10 +74,9 @@
         <button class="y2k-btn" onclick="showScreen('cover')">COVER</button>
         <button class="y2k-btn active" id="nav-home" onclick="showScreen('home')">HOME</button>
         <button class="y2k-btn" id="nav-year" onclick="showScreen('year')">YEAR</button>
-        <button class="y2k-btn" id="nav-week" onclick="showScreen('week')">WEEK</button>
-        <button class="y2k-btn" id="nav-day" onclick="showScreen('day')">DAILY</button>
-        <button class="y2k-btn" id="nav-notes" onclick="showScreen('notes')">BRAIN DUMP</button>
         <button class="y2k-btn" id="nav-extras" onclick="showScreen('extras')">EXTRAS</button>
+        <button class="y2k-btn" id="nav-notes" onclick="showScreen('notes')">NOTES</button>
+        <button class="y2k-btn" id="nav-stickers" onclick="showScreen('stickers')">STICKERS</button>
       </div>
       <div class="nav-group" id="right-nav-tools">
         <button class="y2k-btn c-mint" onclick="exportPage()">COPY</button>
@@ -95,23 +84,29 @@
     </header>
     <main>
       <section id="screen-cover" class="screen">
-        <div class="win-box">
+        <div class="win-box" style="max-width:560px; margin:20px auto;">
           <div class="win-bar c-pink"><span>MY_PLANNER.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" style="text-align:center; padding:30px 16px;">
-            <div class="px" style="font-size:1rem; color:#db2777; margin-bottom:12px;">(&#8226;&#969;&#8226;) &hearts; &#9733; &hearts; (&#9679;&#969;&#9679;)</div>
-            <div class="px" style="font-size:1.7rem; line-height:1.4; text-shadow:3px 3px 0 var(--lav);">DIGITAL<br>PLANNER</div>
-            <div class="px" style="font-size:0.65rem; color:#ec4899; margin:10px 0 18px;">* UNDATED * KAWAII Y2K *</div>
-            <div style="max-width:340px; margin:0 auto 18px; border:2px solid var(--ink); padding:10px; box-shadow:3px 3px 0 var(--ink);">
-              <div style="font-size:1rem; margin-bottom:4px;">this planner belongs to:</div>
-              <input type="text" data-p="owner-name" placeholder="Player One...">
+          <div class="win-content" style="text-align:center; padding:28px 16px;">
+            <div style="margin-bottom:14px; display:flex; justify-content:center; align-items:center; gap:14px;">
+              <img src="./Kawaii%20icon-%20gameboy.png" style="width:50px; height:50px; object-fit:contain;">
+              <img src="./Y2K_sticker_38.png" style="width:46px; height:46px; object-fit:contain;">
+              <img src="./Y2K_sticker_cd.png" style="width:50px; height:50px; object-fit:contain;">
             </div>
-            <button class="y2k-btn c-yel" onclick="showScreen('home')">START &gt;</button>
+            <div class="px" style="font-size:24px; line-height:1.45; text-shadow:3px 3px 0 var(--lav);">DIGITAL<br>PLANNER</div>
+            <div class="px" style="font-size:9px; color:#e11d48; margin:12px 0;">* UNDATED * KAWAII Y2K *</div>
+            <div class="px" style="font-size:8px; text-align:left; max-width:340px; margin:16px auto 4px;">LOADING CUTENESS... 100%</div>
+            <div class="load-bar"><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span></div>
           </div>
         </div>
+        <div style="max-width:420px; margin:16px auto; background:var(--white); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--sh); padding:12px;">
+          <div style="font-size:19px; margin-bottom:4px;">this planner belongs to:</div>
+          <input type="text" data-p="owner-name" placeholder="Type your name...">
+        </div>
+        <div style="text-align:center; margin-bottom:16px;"><button class="y2k-btn c-yel" onclick="showScreen('home')">START &gt;</button></div>
       </section>
       <section id="screen-home" class="screen active">
-        <h2 class="px" style="margin:0 0 4px; font-size:1.15rem;">HOME &hearts;</h2>
-        <p style="margin:0 0 10px; color:var(--shadow);">tap anything to jump there</p>
+        <h2 class="px" style="margin:0 0 4px; font-size:20px;">HOME <img src="./Kawaii%20Folder-%20blush.png" style="width:26px; vertical-align:middle;"></h2>
+        <p style="margin:0 0 12px; color:var(--sh);">tap anything to jump there</p>
         <div class="win-box">
           <div class="win-bar c-pink"><span>MONTHS.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
           <div class="win-content grid-4" id="home-months-grid"></div>
@@ -120,104 +115,104 @@
           <div class="win-bar c-blue"><span>SHORTCUTS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
           <div class="win-content grid-2">
             <div class="tile-btn c-yel" onclick="showScreen('year')">YEAR AT A GLANCE</div>
-            <div class="tile-btn c-mint" onclick="showScreen('extras')">YEAR IN PIXELS</div>
-            <div class="tile-btn c-lav" onclick="showScreen('notes')">BRAIN DUMP</div>
-            <div class="tile-btn c-pink-s" onclick="showScreen('day')">DAILY SPREAD</div>
+            <div class="tile-btn c-mint" onclick="showScreen('extras')">EXTRA TEMPLATES</div>
+            <div class="tile-btn c-lav" onclick="showScreen('notes')">NOTES</div>
+            <div class="tile-btn c-pink" onclick="showScreen('stickers')">STICKER BOOK</div>
+          </div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-lav"><span>HOW TO USE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content" style="line-height:1.7;">
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> tap the tabs on the right to open each month</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> tap the top tabs to go home, to the year, extras or notes</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> on a month page, tap WEEK 1-5 to open that week</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> on a week page, tap OPEN &gt; on a day bar to open that day</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> write the dates yourself - start any day, any year!</div>
           </div>
         </div>
       </section>
       <section id="screen-year" class="screen">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <h2 class="px" style="margin:0; font-size:1rem;">YEAR AT A GLANCE &#9733;</h2>
-          <input type="text" data-p="year-label" placeholder="YEAR: 2026" style="max-width:140px;">
+          <h2 class="px" style="margin:0; font-size:17px;">YEAR AT A GLANCE <img src="./Kawaii%20icon-%20sparkles.png" style="width:26px; vertical-align:middle;"></h2>
+          <div style="display:flex; align-items:center; gap:6px;"><span class="px" style="font-size:10px;">YEAR:</span><input type="text" data-p="year-label" style="width:110px;"></div>
         </div>
         <div class="grid-3" id="year-grid"></div>
       </section>
       <section id="screen-month" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <h2 class="px" id="month-heading" style="margin:0; font-size:1.05rem;">JANUARY &hearts;</h2>
-            <input type="text" id="month-year-input" placeholder="YEAR:" style="width:95px;">
+            <h2 class="px" id="month-heading" style="margin:0; font-size:18px;">JANUARY</h2>
+            <input type="text" id="month-year-input" placeholder="YEAR:" style="width:90px;">
           </div>
           <div style="display:flex; gap:4px; flex-wrap:wrap;">
-            <button class="y2k-btn c-pink" onclick="openWeek(1)">WK 1</button>
-            <button class="y2k-btn c-lav" onclick="openWeek(2)">WK 2</button>
-            <button class="y2k-btn c-blue" onclick="openWeek(3)">WK 3</button>
-            <button class="y2k-btn c-mint" onclick="openWeek(4)">WK 4</button>
-            <button class="y2k-btn c-yel" onclick="openWeek(5)">WK 5</button>
+            <button class="y2k-btn c-pink" onclick="openWeek(1)">WEEK 1</button>
+            <button class="y2k-btn c-pink" onclick="openWeek(2)">WEEK 2</button>
+            <button class="y2k-btn c-pink" onclick="openWeek(3)">WEEK 3</button>
+            <button class="y2k-btn c-pink" onclick="openWeek(4)">WEEK 4</button>
+            <button class="y2k-btn c-pink" onclick="openWeek(5)">WEEK 5</button>
           </div>
         </div>
         <div class="win-box"><div class="win-bar c-pink" id="month-cal-bar"><span>CALENDAR</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="cal-grid" id="month-calendar-cells"></div></div>
         <div class="grid-2">
           <div class="win-box"><div class="win-bar c-yel"><span>GOALS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="month-goals-list"></div></div>
-          <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="month-notes-area" class="lined" style="min-height:192px;" placeholder="Monthly notes..."></textarea></div></div>
+          <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="month-notes-area" class="dotted" style="min-height:210px;"></textarea></div></div>
         </div>
       </section>
       <section id="screen-week" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
-          <div><h2 class="px" id="week-heading" style="margin:0; font-size:1.05rem;">JANUARY &#9733;</h2><input type="text" id="week-range" placeholder="week 1 - __ / __ - __ / __" style="margin-top:4px; max-width:230px;"></div>
+          <div><h2 class="px" id="week-heading" style="margin:0; font-size:17px;">JANUARY</h2><input type="text" id="week-range" placeholder="week 1 - __ / __ - __ / __" style="margin-top:4px; max-width:230px;"></div>
           <div style="display:flex; gap:6px;"><button class="y2k-btn" onclick="showScreen('month')">&lt; MONTH</button><button class="y2k-btn" onclick="changeWeek(-1)">&lt; PREV</button><button class="y2k-btn" onclick="changeWeek(1)">NEXT &gt;</button></div>
         </div>
         <div class="grid-2" id="week-days-grid"></div>
       </section>
       <section id="screen-day" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
-          <div><h2 class="px" id="day-heading" style="margin:0; font-size:1.05rem;">THURSDAY &#9733;</h2><input type="text" id="day-date-str" placeholder="july - week 5 - __ / __ / __" style="margin-top:4px; max-width:250px;"></div>
+          <div><h2 class="px" id="day-heading" style="margin:0; font-size:17px;">MONDAY</h2><input type="text" id="day-date-str" placeholder="january - week 1 - __ / __ / __" style="margin-top:4px; max-width:250px;"></div>
           <div style="display:flex; gap:6px;"><button class="y2k-btn" onclick="showScreen('week')">&lt; WEEK</button><button class="y2k-btn" onclick="changeDay(-1)">&lt; PREV</button><button class="y2k-btn" onclick="changeDay(1)">NEXT &gt;</button></div>
         </div>
         <div class="grid-2">
-          <div class="win-box"><div class="win-bar c-lav"><span>SCHEDULE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-schedule-list" style="padding:8px;"></div></div>
+          <div class="win-box"><div class="win-bar c-pink"><span>SCHEDULE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-schedule-list" style="padding:8px;"></div></div>
           <div>
             <div class="win-box"><div class="win-bar c-pink"><span>TOP 3</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-top3" style="padding:8px;"></div></div>
             <div class="win-box"><div class="win-bar c-lav"><span>TO DO</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-todo" style="padding:8px;"></div></div>
-            <div class="win-box"><div class="win-bar c-blue"><span>WATER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-water" style="display:flex; gap:6px; justify-content:center;"></div></div>
-            <div class="win-box"><div class="win-bar c-mint"><span>MOOD</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-mood" style="display:flex; gap:10px; justify-content:center;"></div></div>
+            <div class="win-box"><div class="win-bar c-blue"><span>WATER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-water" style="display:flex; gap:5px; justify-content:center;"></div></div>
+            <div class="win-box"><div class="win-bar c-mint"><span>MOOD</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-mood" style="display:flex; gap:8px; justify-content:center;"></div></div>
           </div>
         </div>
-        <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="day-notes" class="dotted" style="min-height:110px;" placeholder="Daily notes..."></textarea></div></div>
+        <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="day-notes" class="dotted" style="min-height:110px;"></textarea></div></div>
       </section>
       <section id="screen-notes" class="screen">
-        <div class="win-box">
-          <div class="win-bar c-lav"><span>BRAIN DUMP - FOR EVERY THOUGHT, IDEA, AND MENTAL SIDE QUEST</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content">
-            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; border-bottom:2px solid var(--lav); padding-bottom:8px; margin-bottom:10px;">
-              <div style="flex:1; min-width:180px;">&#9733; Player One: <input type="text" data-p="bd-player" style="max-width:160px; display:inline-block;"></div>
-              <div>Current Mode:
-                <label><input type="checkbox" data-p="bd-m1"> FOCUS</label>
-                <label><input type="checkbox" data-p="bd-m2"> DREAM</label>
-                <label><input type="checkbox" data-p="bd-m3"> CHAOS</label>
-              </div>
-              <div style="min-width:180px;">Today's Vibe: <input type="text" data-p="bd-vibe" style="max-width:130px; display:inline-block;"></div>
-            </div>
-            <div class="grid-2">
-              <textarea data-p="bd-main" class="lined" style="min-height:336px;" placeholder="Brain dump everything here..."></textarea>
-              <div>
-                <div class="win-box"><div class="win-bar c-lav"><span>&hearts; RANDOM THOUGHTS</span></div><div class="win-content" style="padding:8px;"><textarea data-p="bd-rand" class="lined" style="min-height:72px;"></textarea></div></div>
-                <div class="win-box"><div class="win-bar c-pink-s"><span>&#9733; IMPORTANT STUFF</span></div><div class="win-content" style="padding:8px;"><textarea data-p="bd-imp" class="lined" style="min-height:72px;"></textarea></div></div>
-                <div class="win-box"><div class="win-bar c-blue"><span>&hearts; DO NOT FORGET</span></div><div class="win-content" style="padding:8px;"><textarea data-p="bd-dnf" class="lined" style="min-height:72px;"></textarea></div></div>
-              </div>
-            </div>
-            <div style="border:2px solid var(--lav); border-radius:10px; padding:8px; margin-top:4px; text-align:center;">
-              <div class="px" style="font-size:0.62rem;">&hearts; INVENTORY OVERFLOW &hearts;</div>
-              <input type="text" data-p="bd-over" placeholder="It's all good - you got it out..." style="text-align:center;">
-            </div>
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
+          <h2 class="px" style="margin:0; font-size:18px;">NOTES <img src="./Kawaii%20icon-%20blue%20notebook.png" style="width:26px; vertical-align:middle;"></h2>
+          <div style="display:flex; gap:5px;">
+            <button class="y2k-btn c-pink" id="pt-lined" onclick="setPaper('lined')">LINED</button>
+            <button class="y2k-btn" id="pt-dotted" onclick="setPaper('dotted')">DOT</button>
+            <button class="y2k-btn" id="pt-gridded" onclick="setPaper('gridded')">GRID</button>
+            <button class="y2k-btn" id="pt-blank" onclick="setPaper('blank')">BLANK</button>
           </div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-lav"><span id="notes-bar-title">LINED.TXT</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content"><textarea id="notes-pad" data-p="note-body" class="lined" style="min-height:380px;"></textarea></div>
         </div>
       </section>
       <section id="screen-extras" class="screen">
+        <h2 class="px" style="margin:0 0 10px; font-size:18px;">EXTRAS <img src="./Y2K_sticker_Y2K.png" style="width:32px; vertical-align:middle;"></h2>
         <div class="win-box">
-          <div class="win-bar c-pink"><span>YEAR IN PIXELS &hearts; (CLICK SQUARES TO CHANGE COLOR)</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" style="overflow-x:auto;">
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px; font-size:0.85rem;">
-              <span style="background:#ff85c0; padding:2px 6px; border:1px solid var(--ink);">AMAZING</span>
-              <span style="background:#fde047; padding:2px 6px; border:1px solid var(--ink);">GOOD</span>
-              <span style="background:#86efac; padding:2px 6px; border:1px solid var(--ink);">OKAY</span>
-              <span style="background:#93c5fd; padding:2px 6px; border:1px solid var(--ink);">TIRED</span>
-              <span style="background:#c4b5fd; padding:2px 6px; border:1px solid var(--ink);">SAD</span>
-              <span style="background:#e2e8f0; padding:2px 6px; border:1px solid var(--ink);">STRESSED</span>
-            </div>
-            <table class="px-table" id="pixels-table"></table>
-          </div>
+          <div class="win-bar c-mint"><span>YEAR IN PIXELS (CLICK SQUARES TO COLOR)</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content" style="overflow-x:auto;"><table class="px-table" id="pixels-table"></table></div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-yel"><span>EXPENSE TRACKER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content" id="expense-rows"></div>
+        </div>
+      </section>
+      <section id="screen-stickers" class="screen">
+        <h2 class="px" style="margin:0 0 4px; font-size:18px;">STICKER BOOK <img src="./Y2K_sticker_heart.png" style="width:24px; vertical-align:middle;"></h2>
+        <p style="margin:0 0 10px; color:var(--sh);">click any sticker to drop it on screen (drag to move, double-click to remove)</p>
+        <div class="win-box">
+          <div class="win-bar c-pink"><span>STICKERS_1.PNG</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content grid-4" id="sticker-grid"></div>
         </div>
       </section>
     </main>
@@ -225,84 +220,102 @@
   </div>
   <script>
     const DB_URL = 'https://firebaseio.com';
-    let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 0;
+    let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 1;
     let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
     const monthsList = [['JANUARY','c-pink'],['FEBRUARY','c-lav'],['MARCH','c-blue'],['APRIL','c-mint'],['MAY','c-yel'],['JUNE','c-pink-s'],['JULY','c-lav'],['AUGUST','c-blue'],['SEPTEMBER','c-mint'],['OCTOBER','c-yel'],['NOVEMBER','c-pink-s'],['DECEMBER','c-pink']];
     const dayNames = [['SUNDAY','c-pink'],['MONDAY','c-lav'],['TUESDAY','c-blue'],['WEDNESDAY','c-mint'],['THURSDAY','c-yel'],['FRIDAY','c-pink-s'],['SATURDAY','c-lav']];
     const homeGrid = document.getElementById('home-months-grid'), sideBar = document.getElementById('month-sidebar'), yearGrid = document.getElementById('year-grid');
-    monthsList.forEach(([m, col]) => {
-      homeGrid.innerHTML += `<div class="tile-btn ${col}" onclick="openMonth('${m}','${col}')">${m}</div>`;
-      sideBar.innerHTML += `<div class="m-tab ${col}" onclick="openMonth('${m}','${col}')">${m.slice(0,3)}</div>`;
-      yearGrid.innerHTML += `<div class="win-box" style="margin-bottom:0; cursor:pointer;" onclick="openMonth('${m}','${col}')"><div class="win-bar ${col}"><span>${m}</span></div><div class="win-content" style="padding:6px;"><textarea data-p="yr-${m}" class="lined" placeholder="Key dates..." style="min-height:72px;"></textarea></div></div>`;
+    monthsList.forEach(function(item) {
+      const m = item[0], col = item[1];
+      homeGrid.innerHTML += '<div class="tile-btn ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m + '</div>';
+      sideBar.innerHTML += '<div class="m-tab ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m.slice(0,3) + '</div>';
+      let mini = ['S','M','T','W','T','F','S'].map(function(d) { return '<b style="font-size:10px;">' + d + '</b>'; }).join('');
+      for (let c = 1; c <= 35; c++) mini += '<input type="text" class="mini-box" data-p="yr-' + m + '-' + c + '">';
+      yearGrid.innerHTML += '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '" style="cursor:pointer;" onclick="openMonth(\'' + m + '\',\'' + col + '\')"><span>' + m + '</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:6px;"><div class="mini-cal">' + mini + '</div></div></div>';
     });
     const lockBtn = document.createElement('button');
     lockBtn.className = 'y2k-btn c-yel';
     lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT';
-    lockBtn.onclick = () => { const p = prompt('Enter secret PIN (8675309):', editPin); if (p !== null) { editPin = p.trim(); localStorage.setItem('ccbg-edit-pin', editPin); lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT'; pushCloud(); } };
+    lockBtn.onclick = function() { const p = prompt('Enter secret PIN (8675309):', editPin); if (p !== null) { editPin = p.trim(); localStorage.setItem('ccbg-edit-pin', editPin); lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT'; pushCloud(); } };
     document.getElementById('right-nav-tools').appendChild(lockBtn);
-    const pxColors = ['','#ff85c0','#fde047','#86efac','#93c5fd','#c4b5fd','#e2e8f0'];
+    const pxColors = ['','#ff7eb9','#ffe066','#8ce99a','#8ecae6','#c3b1ff','#e2e8f0'];
     const pxt = document.getElementById('pixels-table');
-    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(([m]) => `<th>${m.slice(0,3)}</th>`).join('') + '</tr>';
-    for (let d = 1; d <= 31; d++) {
-      pxt.innerHTML += `<tr><td>${d}</td>` + monthsList.map(([m]) => `<td class="px-cell" data-px="px-${m}-${d}" onclick="cyclePx(this)"></td>`).join('') + '</tr>';
+    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x[0].slice(0,3) + '</th>'; }).join('') + '</tr>';
+    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x[0] + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
+    function cyclePx(td) { const k = td.dataset.px; const n = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = n; td.style.background = pxColors[n]; queueSave(); }
+    const expDiv = document.getElementById('expense-rows');
+    for (let r = 1; r <= 8; r++) expDiv.innerHTML += '<div style="display:grid; grid-template-columns:1fr 2fr 1fr 1fr; gap:6px; margin-bottom:4px;"><input type="text" data-p="ex-d-' + r + '" placeholder="DATE"><input type="text" data-p="ex-i-' + r + '" placeholder="ITEM"><input type="text" data-p="ex-c-' + r + '" placeholder="CATEGORY"><input type="text" data-p="ex-a-' + r + '" placeholder="$0.00"></div>';
+    const myIcons = ['Kawaii Folder- blue.png','Kawaii Folder- blush.png','Kawaii Folder- mocha.png','Kawaii Folder- orange.png','Kawaii Folder- vanilla.png','Kawaii icon- blsh notebook.png','Kawaii icon- blue bow.png','Kawaii icon- blue notebook.png','Kawaii icon- bubble tea.png','Kawaii icon- dk blue bow.png','Kawaii icon- dk navy bow.png','Kawaii icon- drk blue notebook.png','Kawaii icon- emerald bow.png','Kawaii icon- flower.png','Kawaii icon- gameboy.png','Kawaii icon- gold bow.png','Kawaii icon- grape bubble tea.png','Kawaii icon- green bow.png','Kawaii icon- green notebook.png','Kawaii icon- purple bow.png','Kawaii icon- sparkles.png','Kawaii icon- strawberrybubble tea.png','Y2K_sticker_22.png','Y2K_sticker_27.png','Y2K_sticker_30.png','Y2K_sticker_33.png','Y2K_sticker_38.png','Y2K_sticker_39.png','Y2K_sticker_40.png','Y2K_sticker_47.png','Y2K_sticker_camera.png','Y2K_sticker_casette.png','Y2K_sticker_cd.png','Y2K_sticker_flip_phone.png','Y2K_sticker_gaming_headset.png','Y2K_sticker_GIRL.png','Y2K_sticker_heart.png','Y2K_sticker_kawaii.png','Y2K_sticker_panda.png','Y2K_sticker_penguin.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_super_cute.png','Y2K_sticker_Y2K.png'];
+    const sGrid = document.getElementById('sticker-grid');
+    myIcons.forEach(function(f) { const tag = '<img src="./' + encodeURI(f) + '" style="width:52px; height:52px; object-fit:contain; pointer-events:none;">'; const d = document.createElement('div'); d.className = 'sticker-item'; d.innerHTML = tag; d.onclick = function() { addSticker(tag, 140, 140, true); }; sGrid.appendChild(d); });
+    function addSticker(html, x, y, save) {
+      const s = document.createElement('div'); s.className = 'placed-sticker'; s.innerHTML = html; s.style.left = x + 'px'; s.style.top = y + 'px';
+      s.onmousedown = function(e) { const ox = e.clientX - s.offsetLeft, oy = e.clientY - s.offsetTop; document.onmousemove = function(ev) { s.style.left = (ev.clientX - ox) + 'px'; s.style.top = (ev.clientY - oy) + 'px'; }; document.onmouseup = function() { document.onmousemove = null; saveStickers(); }; };
+      s.ondblclick = function() { s.remove(); saveStickers(); };
+      document.body.appendChild(s); if (save) saveStickers();
     }
-    function cyclePx(td) { const k = td.dataset.px; const nxt = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = nxt; td.style.background = pxColors[nxt]; queueSave(); }
+    function saveStickers() { cloudData._stickers = Array.from(document.querySelectorAll('.placed-sticker')).map(function(s) { return { h: s.innerHTML, x: parseInt(s.style.left), y: parseInt(s.style.top) }; }); queueSave(); }
+    function setPaper(type) {
+      const pad = document.getElementById('notes-pad'); pad.className = type === 'blank' ? '' : type;
+      document.getElementById('notes-bar-title').textContent = type.toUpperCase() + '.TXT';
+      ['lined','dotted','gridded','blank'].forEach(function(t) { document.getElementById('pt-' + t).classList.toggle('c-pink', t === type); });
+    }
     function showScreen(name) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.top-nav .y2k-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.top-nav .y2k-btn').forEach(function(b) { b.classList.remove('active'); });
       document.getElementById('screen-' + name).classList.add('active');
       const nb = document.getElementById('nav-' + name); if (nb) nb.classList.add('active');
     }
     function openMonth(month, col) {
       currentMonth = month; showScreen('month');
-      document.getElementById('month-heading').innerHTML = `${month} &hearts;`;
-      document.getElementById('month-cal-bar').className = `win-bar ${col}`;
-      bindField(document.getElementById('month-year-input'), `m-${month}-yr`);
-      bindField(document.getElementById('month-notes-area'), `m-${month}-notes`);
+      document.getElementById('month-heading').innerHTML = month + ' <img src="./Kawaii%20icon-%20blsh%20notebook.png" style="width:24px; vertical-align:middle;">';
+      document.getElementById('month-cal-bar').className = 'win-bar ' + col;
+      bindField(document.getElementById('month-year-input'), 'm-' + month + '-yr');
+      bindField(document.getElementById('month-notes-area'), 'm-' + month + '-notes');
       const cal = document.getElementById('month-calendar-cells');
-      cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(d => `<div class="cal-head">${d}</div>`).join('');
-      for (let i = 1; i <= 35; i++) cal.innerHTML += `<div class="cal-cell"><input type="text" class="cal-day-num" id="cnum-${i}" placeholder="#"><textarea class="cal-note" id="cnote-${i}"></textarea></div>`;
-      for (let i = 1; i <= 35; i++) { bindField(document.getElementById(`cnum-${i}`), `m-${month}-dn-${i}`); bindField(document.getElementById(`cnote-${i}`), `m-${month}-dt-${i}`); }
+      cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(function(d) { return '<div class="cal-head">' + d + '</div>'; }).join('');
+      for (let i = 1; i <= 35; i++) cal.innerHTML += '<div class="cal-cell"><input type="text" class="cal-day-num" id="cnum-' + i + '"><textarea class="cal-note" id="cnote-' + i + '"></textarea></div>';
+      for (let i = 1; i <= 35; i++) { bindField(document.getElementById('cnum-' + i), 'm-' + month + '-dn-' + i); bindField(document.getElementById('cnote-' + i), 'm-' + month + '-dt-' + i); }
       const goals = document.getElementById('month-goals-list'); goals.innerHTML = '';
-      for (let g = 1; g <= 6; g++) goals.innerHTML += `<div class="check-item"><input type="checkbox" id="mgc-${g}"><input type="text" id="mgt-${g}" placeholder="Goal ${g}..."></div>`;
-      for (let g = 1; g <= 6; g++) { bindField(document.getElementById(`mgc-${g}`), `m-${month}-gc-${g}`); bindField(document.getElementById(`mgt-${g}`), `m-${month}-gt-${g}`); }
+      for (let g = 1; g <= 7; g++) goals.innerHTML += '<div class="check-item"><input type="checkbox" id="mgc-' + g + '"><input type="text" id="mgt-' + g + '"></div>';
+      for (let g = 1; g <= 7; g++) { bindField(document.getElementById('mgc-' + g), 'm-' + month + '-gc-' + g); bindField(document.getElementById('mgt-' + g), 'm-' + month + '-gt-' + g); }
     }
     function openWeek(wk) {
       currentWeek = wk; showScreen('week');
-      document.getElementById('week-heading').innerHTML = `${currentMonth} &#9733;`;
-      const r = document.getElementById('week-range'); r.placeholder = `week ${wk} - __ / __ - __ / __`; bindField(r, `w-${currentMonth}-${wk}-rng`);
-      document.getElementById('week-days-grid').innerHTML = dayNames.map(([d, col], idx) => `<div class="win-box" style="margin-bottom:0;"><div class="win-bar ${col}"><span>${d} __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(${idx})">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-${d}" class="lined" style="min-height:120px;"></textarea></div></div>`).join('') + `<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>`;
-      dayNames.forEach(([d]) => bindField(document.getElementById(`wk-${d}`), `w-${currentMonth}-${wk}-${d}`));
+      document.getElementById('week-heading').innerHTML = currentMonth + ' <img src="./Kawaii%20icon-%20purple%20bow.png" style="width:24px; vertical-align:middle;">';
+      const r = document.getElementById('week-range'); r.placeholder = 'week ' + wk + ' - __ / __ - __ / __'; bindField(r, 'w-' + currentMonth + '-' + wk + '-rng');
+      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const d = item[0], col = item[1]; return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
+      dayNames.forEach(function(item) { bindField(document.getElementById('wk-' + item[0]), 'w-' + currentMonth + '-' + wk + '-' + item[0]); });
       const tw = document.getElementById('tw-list');
-      for (let i = 1; i <= 5; i++) tw.innerHTML += `<div class="check-item"><input type="checkbox" id="twc-${i}"><input type="text" id="twt-${i}"></div>`;
-      for (let i = 1; i <= 5; i++) { bindField(document.getElementById(`twc-${i}`), `w-${currentMonth}-${wk}-c-${i}`); bindField(document.getElementById(`twt-${i}`), `w-${currentMonth}-${wk}-t-${i}`); }
+      for (let i = 1; i <= 5; i++) tw.innerHTML += '<div class="check-item"><input type="checkbox" id="twc-' + i + '"><input type="text" id="twt-' + i + '"></div>';
+      for (let i = 1; i <= 5; i++) { bindField(document.getElementById('twc-' + i), 'w-' + currentMonth + '-' + wk + '-c-' + i); bindField(document.getElementById('twt-' + i), 'w-' + currentMonth + '-' + wk + '-t-' + i); }
     }
     function changeWeek(delta) { currentWeek = Math.min(5, Math.max(1, currentWeek + delta)); openWeek(currentWeek); }
     function openDay(idx) {
       currentDayIdx = idx; showScreen('day');
-      const [dName] = dayNames[idx]; const prefix = `d-${currentMonth}-${currentWeek}-${dName}`;
-      document.getElementById('day-heading').innerHTML = `${dName} &#9733;`;
-      const ds = document.getElementById('day-date-str'); ds.placeholder = `${currentMonth.toLowerCase()} - week ${currentWeek} - __/__/__`; bindField(ds, `${prefix}-dt`);
+      const dName = dayNames[idx]; const p = 'd-' + currentMonth + '-' + currentWeek + '-' + dName;
+      document.getElementById('day-heading').innerHTML = dName + ' <img src="./Kawaii%20icon-%20bubble%20tea.png" style="width:24px; vertical-align:middle;">';
+      const ds = document.getElementById('day-date-str'); ds.placeholder = currentMonth.toLowerCase() + ' - week ' + currentWeek + ' - __/__/__'; bindField(ds, p + '-dt');
       const sched = document.getElementById('day-schedule-list'); sched.innerHTML = '';
-      for (let h = 6; h <= 22; h++) { const lbl = h < 12 ? h + 'AM' : (h === 12 ? '12PM' : (h - 12) + 'PM'); sched.innerHTML += `<div class="check-item"><span style="width:42px; font-size:0.9rem; color:var(--shadow);">${lbl}</span><input type="text" id="hr-${h}"></div>`; }
-      for (let h = 6; h <= 22; h++) bindField(document.getElementById(`hr-${h}`), `${prefix}-h-${h}`);
+      for (let h = 6; h <= 22; h++) { const lbl = h < 12 ? h + 'AM' : (h === 12 ? '12PM' : (h - 12) + 'PM'); sched.innerHTML += '<div class="check-item"><span class="px" style="width:46px; font-size:8px; color:var(--sh);">' + lbl + '</span><input type="text" id="hr-' + h + '"></div>'; }
+      for (let h = 6; h <= 22; h++) bindField(document.getElementById('hr-' + h), p + '-h-' + h);
       const t3 = document.getElementById('day-top3'); t3.innerHTML = '';
-      for (let i = 1; i <= 3; i++) t3.innerHTML += `<div class="check-item"><span>${i}.</span><input type="text" id="t3-${i}"></div>`;
-      for (let i = 1; i <= 3; i++) bindField(document.getElementById(`t3-${i}`), `${prefix}-t3-${i}`);
+      for (let i = 1; i <= 3; i++) t3.innerHTML += '<div class="check-item"><b class="px" style="font-size:10px;">' + i + '.</b><input type="text" id="t3-' + i + '"></div>';
+      for (let i = 1; i <= 3; i++) bindField(document.getElementById('t3-' + i), p + '-t3-' + i);
       const td = document.getElementById('day-todo'); td.innerHTML = '';
-      for (let i = 1; i <= 5; i++) td.innerHTML += `<div class="check-item"><input type="checkbox" id="tdc-${i}"><input type="text" id="tdt-${i}"></div>`;
-      for (let i = 1; i <= 5; i++) { bindField(document.getElementById(`tdc-${i}`), `${prefix}-dc-${i}`); bindField(document.getElementById(`tdt-${i}`), `${prefix}-dt-${i}`); }
+      for (let i = 1; i <= 5; i++) td.innerHTML += '<div class="check-item"><input type="checkbox" id="tdc-' + i + '"><input type="text" id="tdt-' + i + '"></div>';
+      for (let i = 1; i <= 5; i++) { bindField(document.getElementById('tdc-' + i), p + '-dc-' + i); bindField(document.getElementById('tdt-' + i), p + '-dt-' + i); }
       const wt = document.getElementById('day-water'); wt.innerHTML = '';
-      for (let w = 1; w <= 8; w++) { const b = document.createElement('div'); b.className = 'water-box' + (cloudData[`${prefix}-w-${w}`] ? ' filled' : ''); b.onclick = () => { cloudData[`${prefix}-w-${w}`] = !cloudData[`${prefix}-w-${w}`]; b.classList.toggle('filled'); queueSave(); }; wt.appendChild(b); }
+      for (let w = 1; w <= 8; w++) { const b = document.createElement('div'); b.className = 'water-box' + (cloudData[p + '-w-' + w] ? ' filled' : ''); b.onclick = function() { cloudData[p + '-w-' + w] = !cloudData[p + '-w-' + w]; b.classList.toggle('filled'); queueSave(); }; wt.appendChild(b); }
       const md = document.getElementById('day-mood'); md.innerHTML = '';
-      ['&hearts;','&#9733;','&#10022;','&#9790;','&#9834;'].forEach((sym, mi) => { const btn = document.createElement('button'); btn.className = 'mood-btn' + (cloudData[`${prefix}-mood`] === mi ? ' picked' : ''); btn.innerHTML = sym; btn.onclick = () => { cloudData[`${prefix}-mood`] = mi; openDay(idx); queueSave(); }; md.appendChild(btn); });
-      bindField(document.getElementById('day-notes'), `${prefix}-notes`);
+      ['Y2K_sticker_38.png','Kawaii%20icon-%20sparkles.png','Kawaii%20icon-%20flower.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_47.png'].forEach(function(u, mi) { const btn = document.createElement('button'); btn.className = 'mood-btn' + (cloudData[p + '-mood'] === mi ? ' picked' : ''); btn.innerHTML = '<img src="./' + u + '" style="width:26px;">'; btn.onclick = function() { cloudData[p + '-mood'] = mi; openDay(idx); queueSave(); }; md.appendChild(btn); });
+      bindField(document.getElementById('day-notes'), p + '-notes');
     }
     function changeDay(delta) { currentDayIdx = (currentDayIdx + delta + 7) % 7; openDay(currentDayIdx); }
     function bindField(el, k) {
       el.dataset.ckey = k; const v = cloudData[k];
       if (el.type === 'checkbox') el.checked = v === true; else el.value = v || '';
-      el.oninput = el.onchange = () => { cloudData[k] = el.type === 'checkbox' ? el.checked : el.value; queueSave(); };
+      el.oninput = el.onchange = function() { cloudData[k] = el.type === 'checkbox' ? el.checked : el.value; queueSave(); };
     }
     function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(pushCloud, 600); }
     async function pushCloud() {
@@ -312,20 +325,20 @@
     }
     async function loadCloud() {
       const res = await fetch(DB_URL); const data = await res.json();
-      if (data) { cloudData = data; document.querySelectorAll('[data-ckey]').forEach(el => bindField(el, el.dataset.ckey)); document.querySelectorAll('[data-px]').forEach(td => td.style.background = pxColors[cloudData[td.dataset.px] || 0]); }
+      if (data) {
+        cloudData = data;
+        document.querySelectorAll('[data-ckey]').forEach(function(el) { bindField(el, el.dataset.ckey); });
+        document.querySelectorAll('[data-px]').forEach(function(td) { td.style.background = pxColors[cloudData[td.dataset.px] || 0]; });
+        if (Array.isArray(cloudData._stickers)) cloudData._stickers.forEach(function(st) { addSticker(st.h, st.x, st.y, false); });
+      }
     }
-    document.querySelectorAll('[data-p]').forEach(el => bindField(el, el.dataset.p));
-    openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(4); showScreen('home'); loadCloud();
-        function exportPage() {
+    document.querySelectorAll('[data-p]').forEach(function(el) { bindField(el, el.dataset.p); });
+    openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(1); showScreen('cover'); loadCloud();
+    function exportPage() {
       const lines = [];
-      document.querySelectorAll('.screen.active input[type="text"], .screen.active textarea').forEach(el => {
-        if (el.value.trim()) lines.push(el.value.trim());
-      });
-      navigator.clipboard.writeText(lines.join('\n'));
-      alert('Copied notes from this page!');
+      document.querySelectorAll('.screen.active input[type="text"], .screen.active textarea').forEach(function(el) { if (el.value.trim()) lines.push(el.value.trim()); });
+      navigator.clipboard.writeText(lines.join('\n')); alert('Copied notes from this page!');
     }
   </script>
 </body>
 </html>
-
-    
