@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MY_PLANNER.EXE</title>
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'PressStartLocal';
+      src: url('./PressStart2P-Regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'MyHandwriting';
+      src: url('./Unlucky%20Handwriting.ttf') format('truetype');
+    }
     :root {
       --bg: #fdfbff; --grid: #efe6ff; --ink: #35294c; --sh: #8c7aa9;
       --pink: #ff7eb9; --pink-s: #ffb8dc; --lav: #c3b1ff; --blue: #8ecae6;
       --mint: #8ce99a; --yel: #ffe066; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 8px; background: transparent; font-family: 'VT323', monospace; font-size: 20px; color: var(--ink); }
-    .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill { font-family: 'Press Start 2P', monospace; letter-spacing: 0.4px; }
+    body { margin: 0; padding: 8px; background: transparent; font-family: 'MyHandwriting', cursive; font-size: 22px; color: var(--ink); }
+    .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill { font-family: 'PressStartLocal', monospace; letter-spacing: 0.4px; }
     .planner-frame {
       max-width: 960px; margin: 0 auto; background-color: var(--bg);
       background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
@@ -41,7 +46,7 @@
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
     .tile-btn { font-size: 10px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 16px 8px; text-align: center; cursor: pointer; }
-    input[type="text"], textarea { width: 100%; border: none; border-bottom: 1.5px solid #d8b4fe; padding: 3px 6px; font-family: 'VT323', monospace; font-size: 20px; color: var(--ink); background: transparent; }
+    input[type="text"], textarea { width: 100%; border: none; border-bottom: 1.5px solid #d8b4fe; padding: 3px 6px; font-family: 'MyHandwriting', cursive; font-size: 22px; color: var(--ink); background: transparent; }
     textarea { resize: vertical; line-height: 24px; border-bottom: none; }
     .lined { background-image: repeating-linear-gradient(transparent, transparent 23px, #e9d5ff 24px); background-size: 100% 24px; }
     .dotted { background-image: radial-gradient(#c3b1ff 1.3px, transparent 1.3px); background-size: 14px 14px; }
@@ -49,10 +54,10 @@
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
     .cal-head { font-size: 9px; text-align: center; padding: 7px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
     .cal-cell { min-height: 70px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 3px; display: flex; flex-direction: column; }
-    .cal-day-num { width: 28px !important; height: 22px !important; padding: 1px 3px !important; font-size: 16px !important; border: 1.5px solid var(--ink) !important; text-align: center; }
-    .cal-note { padding: 2px !important; font-size: 17px !important; line-height: 17px; min-height: 40px; }
+    .cal-day-num { width: 28px !important; height: 22px !important; padding: 1px 3px !important; font-size: 18px !important; border: 1.5px solid var(--ink) !important; text-align: center; }
+    .cal-note { padding: 2px !important; font-size: 19px !important; line-height: 19px; min-height: 40px; }
     .mini-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-size: 11px; }
-    .mini-box { border: 1px solid #cbd5e1; height: 18px; font-size: 13px; padding: 0; text-align: center; }
+    .mini-box { border: 1px solid #cbd5e1; height: 18px; font-size: 14px; padding: 0; text-align: center; }
     .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 3px 0; }
     .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--pink); flex-shrink: 0; }
     .load-bar { display: flex; gap: 2px; max-width: 340px; margin: 12px auto 18px; padding: 3px; border: 2px solid var(--ink); background: var(--white); }
@@ -79,7 +84,7 @@
         <button class="y2k-btn" id="nav-stickers" onclick="showScreen('stickers')">STICKERS</button>
       </div>
       <div class="nav-group" id="right-nav-tools">
-        <button class="y2k-btn c-mint" onclick="exportPage()">COPY</button>
+        <button class="y2k-btn c-mint" onclick="goToday()">TODAY</button>
       </div>
     </header>
     <main>
@@ -99,7 +104,7 @@
           </div>
         </div>
         <div style="max-width:420px; margin:16px auto; background:var(--white); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--sh); padding:12px;">
-          <div style="font-size:19px; margin-bottom:4px;">this planner belongs to:</div>
+          <div style="font-size:21px; margin-bottom:4px;">this planner belongs to:</div>
           <input type="text" data-p="owner-name" placeholder="Type your name...">
         </div>
         <div style="text-align:center; margin-bottom:16px;"><button class="y2k-btn c-yel" onclick="showScreen('home')">START &gt;</button></div>
@@ -226,7 +231,7 @@
     const dayNames = [['SUNDAY','c-pink'],['MONDAY','c-lav'],['TUESDAY','c-blue'],['WEDNESDAY','c-mint'],['THURSDAY','c-yel'],['FRIDAY','c-pink-s'],['SATURDAY','c-lav']];
     const homeGrid = document.getElementById('home-months-grid'), sideBar = document.getElementById('month-sidebar'), yearGrid = document.getElementById('year-grid');
     monthsList.forEach(function(item) {
-      const m = item[0], col = item[1];
+      const m = item, col = item;
       homeGrid.innerHTML += '<div class="tile-btn ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m + '</div>';
       sideBar.innerHTML += '<div class="m-tab ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m.slice(0,3) + '</div>';
       let mini = ['S','M','T','W','T','F','S'].map(function(d) { return '<b style="font-size:10px;">' + d + '</b>'; }).join('');
@@ -240,8 +245,8 @@
     document.getElementById('right-nav-tools').appendChild(lockBtn);
     const pxColors = ['','#ff7eb9','#ffe066','#8ce99a','#8ecae6','#c3b1ff','#e2e8f0'];
     const pxt = document.getElementById('pixels-table');
-    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x[0].slice(0,3) + '</th>'; }).join('') + '</tr>';
-    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x[0] + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
+    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x.slice(0,3) + '</th>'; }).join('') + '</tr>';
+    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
     function cyclePx(td) { const k = td.dataset.px; const n = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = n; td.style.background = pxColors[n]; queueSave(); }
     const expDiv = document.getElementById('expense-rows');
     for (let r = 1; r <= 8; r++) expDiv.innerHTML += '<div style="display:grid; grid-template-columns:1fr 2fr 1fr 1fr; gap:6px; margin-bottom:4px;"><input type="text" data-p="ex-d-' + r + '" placeholder="DATE"><input type="text" data-p="ex-i-' + r + '" placeholder="ITEM"><input type="text" data-p="ex-c-' + r + '" placeholder="CATEGORY"><input type="text" data-p="ex-a-' + r + '" placeholder="$0.00"></div>';
@@ -284,8 +289,8 @@
       currentWeek = wk; showScreen('week');
       document.getElementById('week-heading').innerHTML = currentMonth + ' <img src="./Kawaii%20icon-%20purple%20bow.png" style="width:24px; vertical-align:middle;">';
       const r = document.getElementById('week-range'); r.placeholder = 'week ' + wk + ' - __ / __ - __ / __'; bindField(r, 'w-' + currentMonth + '-' + wk + '-rng');
-      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const d = item[0], col = item[1]; return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
-      dayNames.forEach(function(item) { bindField(document.getElementById('wk-' + item[0]), 'w-' + currentMonth + '-' + wk + '-' + item[0]); });
+      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const d = item, col = item; return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
+      dayNames.forEach(function(item) { bindField(document.getElementById('wk-' + item), 'w-' + currentMonth + '-' + wk + '-' + item); });
       const tw = document.getElementById('tw-list');
       for (let i = 1; i <= 5; i++) tw.innerHTML += '<div class="check-item"><input type="checkbox" id="twc-' + i + '"><input type="text" id="twt-' + i + '"></div>';
       for (let i = 1; i <= 5; i++) { bindField(document.getElementById('twc-' + i), 'w-' + currentMonth + '-' + wk + '-c-' + i); bindField(document.getElementById('twt-' + i), 'w-' + currentMonth + '-' + wk + '-t-' + i); }
@@ -332,13 +337,15 @@
         if (Array.isArray(cloudData._stickers)) cloudData._stickers.forEach(function(st) { addSticker(st.h, st.x, st.y, false); });
       }
     }
+    function goToday() {
+      const now = new Date();
+      const [m, col] = monthsList[now.getMonth()];
+      openMonth(m, col);
+      openWeek(Math.ceil(now.getDate() / 7));
+      openDay(now.getDay());
+    }
     document.querySelectorAll('[data-p]').forEach(function(el) { bindField(el, el.dataset.p); });
     openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(1); showScreen('cover'); loadCloud();
-    function exportPage() {
-      const lines = [];
-      document.querySelectorAll('.screen.active input[type="text"], .screen.active textarea').forEach(function(el) { if (el.value.trim()) lines.push(el.value.trim()); });
-      navigator.clipboard.writeText(lines.join('\n')); alert('Copied notes from this page!');
-    }
   </script>
 </body>
 </html>
