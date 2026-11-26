@@ -19,7 +19,7 @@
       --mint: #8ce99a; --yel: #ffe066; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 8px; background: transparent; font-family: 'MyHandwriting', cursive; font-size: 22px; color: var(--ink); }
+    body { margin: 0; padding: 8px; background: transparent; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; color: var(--ink); }
     .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill { font-family: 'PressStartLocal', monospace; letter-spacing: 0.4px; }
     .planner-frame {
       max-width: 960px; margin: 0 auto; background-color: var(--bg);
@@ -227,11 +227,11 @@
     const DB_URL = 'https://firebaseio.com';
     let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 1;
     let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
-    const monthsList = [['JANUARY','c-pink'],['FEBRUARY','c-lav'],['MARCH','c-blue'],['APRIL','c-mint'],['MAY','c-yel'],['JUNE','c-pink-s'],['JULY','c-lav'],['AUGUST','c-blue'],['SEPTEMBER','c-mint'],['OCTOBER','c-yel'],['NOVEMBER','c-pink-s'],['DECEMBER','c-pink']];
-    const dayNames = [['SUNDAY','c-pink'],['MONDAY','c-lav'],['TUESDAY','c-blue'],['WEDNESDAY','c-mint'],['THURSDAY','c-yel'],['FRIDAY','c-pink-s'],['SATURDAY','c-lav']];
+    const monthsList = ['JANUARY|c-pink','FEBRUARY|c-lav','MARCH|c-blue','APRIL|c-mint','MAY|c-yel','JUNE|c-pink-s','JULY|c-lav','AUGUST|c-blue','SEPTEMBER|c-mint','OCTOBER|c-yel','NOVEMBER|c-pink-s','DECEMBER|c-pink'];
+    const dayNames = ['SUNDAY|c-pink','MONDAY|c-lav','TUESDAY|c-blue','WEDNESDAY|c-mint','THURSDAY|c-yel','FRIDAY|c-pink-s','SATURDAY|c-lav'];
     const homeGrid = document.getElementById('home-months-grid'), sideBar = document.getElementById('month-sidebar'), yearGrid = document.getElementById('year-grid');
     monthsList.forEach(function(item) {
-      const m = item, col = item;
+      const parts = item.split('|'), m = parts.shift(), col = parts.shift();
       homeGrid.innerHTML += '<div class="tile-btn ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m + '</div>';
       sideBar.innerHTML += '<div class="m-tab ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m.slice(0,3) + '</div>';
       let mini = ['S','M','T','W','T','F','S'].map(function(d) { return '<b style="font-size:10px;">' + d + '</b>'; }).join('');
@@ -245,52 +245,15 @@
     document.getElementById('right-nav-tools').appendChild(lockBtn);
     const pxColors = ['','#ff7eb9','#ffe066','#8ce99a','#8ecae6','#c3b1ff','#e2e8f0'];
     const pxt = document.getElementById('pixels-table');
-    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x.slice(0,3) + '</th>'; }).join('') + '</tr>';
-    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
-    function cyclePx(td) { const k = td.dataset.px; const n = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = n; td.style.background = pxColors[n]; queueSave(); }
-    const expDiv = document.getElementById('expense-rows');
-    for (let r = 1; r <= 8; r++) expDiv.innerHTML += '<div style="display:grid; grid-template-columns:1fr 2fr 1fr 1fr; gap:6px; margin-bottom:4px;"><input type="text" data-p="ex-d-' + r + '" placeholder="DATE"><input type="text" data-p="ex-i-' + r + '" placeholder="ITEM"><input type="text" data-p="ex-c-' + r + '" placeholder="CATEGORY"><input type="text" data-p="ex-a-' + r + '" placeholder="$0.00"></div>';
-    const myIcons = ['Kawaii Folder- blue.png','Kawaii Folder- blush.png','Kawaii Folder- mocha.png','Kawaii Folder- orange.png','Kawaii Folder- vanilla.png','Kawaii icon- blsh notebook.png','Kawaii icon- blue bow.png','Kawaii icon- blue notebook.png','Kawaii icon- bubble tea.png','Kawaii icon- dk blue bow.png','Kawaii icon- dk navy bow.png','Kawaii icon- drk blue notebook.png','Kawaii icon- emerald bow.png','Kawaii icon- flower.png','Kawaii icon- gameboy.png','Kawaii icon- gold bow.png','Kawaii icon- grape bubble tea.png','Kawaii icon- green bow.png','Kawaii icon- green notebook.png','Kawaii icon- purple bow.png','Kawaii icon- sparkles.png','Kawaii icon- strawberrybubble tea.png','Y2K_sticker_22.png','Y2K_sticker_27.png','Y2K_sticker_30.png','Y2K_sticker_33.png','Y2K_sticker_38.png','Y2K_sticker_39.png','Y2K_sticker_40.png','Y2K_sticker_47.png','Y2K_sticker_camera.png','Y2K_sticker_casette.png','Y2K_sticker_cd.png','Y2K_sticker_flip_phone.png','Y2K_sticker_gaming_headset.png','Y2K_sticker_GIRL.png','Y2K_sticker_heart.png','Y2K_sticker_kawaii.png','Y2K_sticker_panda.png','Y2K_sticker_penguin.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_super_cute.png','Y2K_sticker_Y2K.png'];
-    const sGrid = document.getElementById('sticker-grid');
-    myIcons.forEach(function(f) { const tag = '<img src="./' + encodeURI(f) + '" style="width:52px; height:52px; object-fit:contain; pointer-events:none;">'; const d = document.createElement('div'); d.className = 'sticker-item'; d.innerHTML = tag; d.onclick = function() { addSticker(tag, 140, 140, true); }; sGrid.appendChild(d); });
-    function addSticker(html, x, y, save) {
-      const s = document.createElement('div'); s.className = 'placed-sticker'; s.innerHTML = html; s.style.left = x + 'px'; s.style.top = y + 'px';
-      s.onmousedown = function(e) { const ox = e.clientX - s.offsetLeft, oy = e.clientY - s.offsetTop; document.onmousemove = function(ev) { s.style.left = (ev.clientX - ox) + 'px'; s.style.top = (ev.clientY - oy) + 'px'; }; document.onmouseup = function() { document.onmousemove = null; saveStickers(); }; };
-      s.ondblclick = function() { s.remove(); saveStickers(); };
-      document.body.appendChild(s); if (save) saveStickers();
+    pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x.split('|').shift().slice(0,3) + '</th>'; }).join('') + '</tr>';
+    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x.split('|').shift() + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
     }
-    function saveStickers() { cloudData._stickers = Array.from(document.querySelectorAll('.placed-sticker')).map(function(s) { return { h: s.innerHTML, x: parseInt(s.style.left), y: parseInt(s.style.top) }; }); queueSave(); }
-    function setPaper(type) {
-      const pad = document.getElementById('notes-pad'); pad.className = type === 'blank' ? '' : type;
-      document.getElementById('notes-bar-title').textContent = type.toUpperCase() + '.TXT';
-      ['lined','dotted','gridded','blank'].forEach(function(t) { document.getElementById('pt-' + t).classList.toggle('c-pink', t === type); });
-    }
-    function showScreen(name) {
-      document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
-      document.querySelectorAll('.top-nav .y2k-btn').forEach(function(b) { b.classList.remove('active'); });
-      document.getElementById('screen-' + name).classList.add('active');
-      const nb = document.getElementById('nav-' + name); if (nb) nb.classList.add('active');
-    }
-    function openMonth(month, col) {
-      currentMonth = month; showScreen('month');
-      document.getElementById('month-heading').innerHTML = month + ' <img src="./Kawaii%20icon-%20blsh%20notebook.png" style="width:24px; vertical-align:middle;">';
-      document.getElementById('month-cal-bar').className = 'win-bar ' + col;
-      bindField(document.getElementById('month-year-input'), 'm-' + month + '-yr');
-      bindField(document.getElementById('month-notes-area'), 'm-' + month + '-notes');
-      const cal = document.getElementById('month-calendar-cells');
-      cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(function(d) { return '<div class="cal-head">' + d + '</div>'; }).join('');
-      for (let i = 1; i <= 35; i++) cal.innerHTML += '<div class="cal-cell"><input type="text" class="cal-day-num" id="cnum-' + i + '"><textarea class="cal-note" id="cnote-' + i + '"></textarea></div>';
-      for (let i = 1; i <= 35; i++) { bindField(document.getElementById('cnum-' + i), 'm-' + month + '-dn-' + i); bindField(document.getElementById('cnote-' + i), 'm-' + month + '-dt-' + i); }
-      const goals = document.getElementById('month-goals-list'); goals.innerHTML = '';
-      for (let g = 1; g <= 7; g++) goals.innerHTML += '<div class="check-item"><input type="checkbox" id="mgc-' + g + '"><input type="text" id="mgt-' + g + '"></div>';
-      for (let g = 1; g <= 7; g++) { bindField(document.getElementById('mgc-' + g), 'm-' + month + '-gc-' + g); bindField(document.getElementById('mgt-' + g), 'm-' + month + '-gt-' + g); }
-    }
-    function openWeek(wk) {
+        function openWeek(wk) {
       currentWeek = wk; showScreen('week');
       document.getElementById('week-heading').innerHTML = currentMonth + ' <img src="./Kawaii%20icon-%20purple%20bow.png" style="width:24px; vertical-align:middle;">';
       const r = document.getElementById('week-range'); r.placeholder = 'week ' + wk + ' - __ / __ - __ / __'; bindField(r, 'w-' + currentMonth + '-' + wk + '-rng');
-      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const d = item, col = item; return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
-      dayNames.forEach(function(item) { bindField(document.getElementById('wk-' + item), 'w-' + currentMonth + '-' + wk + '-' + item); });
+      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const parts = item.split('|'), d = parts.shift(), col = parts.shift(); return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
+      dayNames.forEach(function(item) { const d = item.split('|').shift(); bindField(document.getElementById('wk-' + d), 'w-' + currentMonth + '-' + wk + '-' + d); });
       const tw = document.getElementById('tw-list');
       for (let i = 1; i <= 5; i++) tw.innerHTML += '<div class="check-item"><input type="checkbox" id="twc-' + i + '"><input type="text" id="twt-' + i + '"></div>';
       for (let i = 1; i <= 5; i++) { bindField(document.getElementById('twc-' + i), 'w-' + currentMonth + '-' + wk + '-c-' + i); bindField(document.getElementById('twt-' + i), 'w-' + currentMonth + '-' + wk + '-t-' + i); }
@@ -298,7 +261,7 @@
     function changeWeek(delta) { currentWeek = Math.min(5, Math.max(1, currentWeek + delta)); openWeek(currentWeek); }
     function openDay(idx) {
       currentDayIdx = idx; showScreen('day');
-      const dName = dayNames[idx]; const p = 'd-' + currentMonth + '-' + currentWeek + '-' + dName;
+      const dName = dayNames.slice(idx, idx + 1).shift().split('|').shift(); const p = 'd-' + currentMonth + '-' + currentWeek + '-' + dName;
       document.getElementById('day-heading').innerHTML = dName + ' <img src="./Kawaii%20icon-%20bubble%20tea.png" style="width:24px; vertical-align:middle;">';
       const ds = document.getElementById('day-date-str'); ds.placeholder = currentMonth.toLowerCase() + ' - week ' + currentWeek + ' - __/__/__'; bindField(ds, p + '-dt');
       const sched = document.getElementById('day-schedule-list'); sched.innerHTML = '';
@@ -316,31 +279,10 @@
       ['Y2K_sticker_38.png','Kawaii%20icon-%20sparkles.png','Kawaii%20icon-%20flower.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_47.png'].forEach(function(u, mi) { const btn = document.createElement('button'); btn.className = 'mood-btn' + (cloudData[p + '-mood'] === mi ? ' picked' : ''); btn.innerHTML = '<img src="./' + u + '" style="width:26px;">'; btn.onclick = function() { cloudData[p + '-mood'] = mi; openDay(idx); queueSave(); }; md.appendChild(btn); });
       bindField(document.getElementById('day-notes'), p + '-notes');
     }
-    function changeDay(delta) { currentDayIdx = (currentDayIdx + delta + 7) % 7; openDay(currentDayIdx); }
-    function bindField(el, k) {
-      el.dataset.ckey = k; const v = cloudData[k];
-      if (el.type === 'checkbox') el.checked = v === true; else el.value = v || '';
-      el.oninput = el.onchange = function() { cloudData[k] = el.type === 'checkbox' ? el.checked : el.value; queueSave(); };
-    }
-    function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(pushCloud, 600); }
-    async function pushCloud() {
-      if (!editPin) return;
-      const res = await fetch(DB_URL, { method: 'PUT', body: JSON.stringify(Object.assign({}, cloudData, { _pin: editPin })) });
-      if (!res.ok) alert('Wrong PIN! Click UNLOCK EDIT and enter 8675309.');
-    }
-    async function loadCloud() {
-      const res = await fetch(DB_URL); const data = await res.json();
-      if (data) {
-        cloudData = data;
-        document.querySelectorAll('[data-ckey]').forEach(function(el) { bindField(el, el.dataset.ckey); });
-        document.querySelectorAll('[data-px]').forEach(function(td) { td.style.background = pxColors[cloudData[td.dataset.px] || 0]; });
-        if (Array.isArray(cloudData._stickers)) cloudData._stickers.forEach(function(st) { addSticker(st.h, st.x, st.y, false); });
-      }
-    }
     function goToday() {
       const now = new Date();
-      const [m, col] = monthsList[now.getMonth()];
-      openMonth(m, col);
+      const parts = monthsList.slice(now.getMonth(), now.getMonth() + 1).shift().split('|');
+      openMonth(parts.shift(), parts.shift());
       openWeek(Math.ceil(now.getDate() / 7));
       openDay(now.getDay());
     }
