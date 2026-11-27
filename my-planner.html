@@ -140,10 +140,14 @@
           </div>
         </div>
       </section>
-      <section id="screen-year" class="screen">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px;">
           <h2 class="px" style="margin:0; font-size:18px;">YEAR AT A GLANCE <img src="./Kawaii%20icon-%20sparkles.png" style="width:26px; vertical-align:middle;"></h2>
-          <div style="display:flex; align-items:center; gap:6px;"><span class="px" style="font-size:10px;">YEAR:</span><input type="text" data-p="year-label" style="width:110px;"></div>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px;">
+            <span class="px" style="font-size:10px;">YEAR:</span>
+            <input type="text" id="year-label-input" data-p="year-label" placeholder="2026" style="width:85px;">
+            <button class="y2k-btn c-mint" onclick="autoFillYearDays()">AUTO-FILL DAYS</button>
+            <button class="y2k-btn c-pink-s" onclick="newYearReset()">NEW YEAR RESET</button>
+          </div>
         </div>
         <div class="grid-3" id="year-grid"></div>
       </section>
@@ -492,6 +496,42 @@
       openMonth(parts.shift(), parts.shift());
       openWeek(Math.ceil(now.getDate() / 7));
       openDay(now.getDay());
+    }
+        function autoFillYearDays() {
+      const yr = parseInt((document.getElementById('year-label-input').value || '').trim(), 10) || new Date().getFullYear();
+      document.getElementById('year-label-input').value = yr;
+      cloudData['year-label'] = String(yr);
+      monthsList.forEach(function(item, mIdx) {
+        const mName = item.split('|').shift();
+        const firstDay = new Date(yr, mIdx, 1).getDay();
+        const daysInMonth = new Date(yr, mIdx + 1, 0).getDate();
+        for (let c = 1; c <= 35; c++) {
+          const dayNum = c - firstDay;
+          const val = (dayNum >= 1 && dayNum <= daysInMonth) ? String(dayNum) : '';
+          cloudData['yr-' + mName + '-' + c] = val;
+          cloudData['m-' + mName + '-dn-' + c] = val;
+          const box = document.querySelector('[data-p="yr-' + mName + '-' + c + '"]');
+          if (box) box.value = val;
+        }
+      });
+      openMonth(currentMonth, monthsList.find(function(x) { return x.split('|').shift() === currentMonth; }).split('|').pop());
+      showScreen('year');
+      queueSave();
+    }
+    function newYearReset() {
+      const blob = new Blob([JSON.stringify(cloudData, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'planner-backup-' + (cloudData['year-label'] || 'export') + '.json';
+      a.click();
+      const keepOwner = cloudData['owner-name'] || '';
+      cloudData = keepOwner ? { 'owner-name': keepOwner } : {};
+      document.querySelectorAll('[data-ckey]').forEach(function(el) { if (el.dataset.ckey !== 'owner-name') { if (el.type === 'checkbox') el.checked = false; else el.value = ''; } });
+      document.querySelectorAll('[data-px]').forEach(function(td) { td.style.background = ''; });
+      document.querySelectorAll('[data-hab]').forEach(function(td) { td.style.background = ''; });
+      document.querySelectorAll('.placed-sticker').forEach(function(s) { s.remove(); });
+      renderExpensePage(1); renderMonthExpenses(currentMonth);
+      queueSave();
     }
     document.querySelectorAll('[data-p]').forEach(function(el) { bindField(el, el.dataset.p); });
     renderExpensePage(1); openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(1); showScreen('cover'); loadCloud();
