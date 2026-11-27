@@ -278,10 +278,28 @@
       for (let c = 1; c <= 35; c++) mini += '<input type="text" class="mini-box" data-p="yr-' + m + '-' + c + '">';
       yearGrid.innerHTML += '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '" style="cursor:pointer;" onclick="openMonth(\'' + m + '\',\'' + col + '\')"><span>' + m + '</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><div class="mini-cal">' + mini + '</div></div></div>';
     });
+        const pinInput = document.createElement('input');
+    pinInput.type = 'password';
+    pinInput.placeholder = 'PIN';
+    pinInput.value = editPin;
+    pinInput.style.cssText = 'width:82px; border:2px solid var(--ink); background:var(--white); padding:6px 8px; font-family:monospace; font-size:13px; display:' + (editPin ? 'none' : 'inline-block') + ';';
     const lockBtn = document.createElement('button');
     lockBtn.className = 'y2k-btn c-yel';
-    lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT';
-    lockBtn.onclick = function() { const p = prompt('Enter secret PIN (8675309):', editPin); if (p !== null) { editPin = p.trim(); localStorage.setItem('ccbg-edit-pin', editPin); lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT'; pushCloud(); } };
+    lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK';
+    lockBtn.onclick = function() {
+      if (pinInput.style.display === 'none') {
+        pinInput.style.display = 'inline-block';
+        pinInput.focus();
+        lockBtn.textContent = 'SAVE PIN';
+      } else {
+        editPin = pinInput.value.trim();
+        localStorage.setItem('ccbg-edit-pin', editPin);
+        pinInput.style.display = editPin ? 'none' : 'inline-block';
+        lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK';
+        pushCloud();
+      }
+    };
+    document.getElementById('right-nav-tools').appendChild(pinInput);
     document.getElementById('right-nav-tools').appendChild(lockBtn);
     const moodItems = ['CLEAR|#ffffff','CONTENT|#ff7eb9','THANKFUL|#ffe066','ANNOYED|#c3b1ff','SAD|#8ecae6','HANGRY|#ffb07c','CHILL|#8ce99a'];
     const legendBar = document.getElementById('mood-legend-bar');
