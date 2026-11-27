@@ -406,7 +406,9 @@
       currentMonth = month; showScreen('month');
       document.getElementById('month-heading').innerHTML = month + ' <img src="./Kawaii%20icon-%20blsh%20notebook.png" style="width:24px; vertical-align:middle;">';
       document.getElementById('month-cal-bar').className = 'win-bar ' + col;
-      bindField(document.getElementById('month-year-input'), 'm-' + month + '-yr');
+            const yrBox = document.getElementById('month-year-input');
+      bindField(yrBox, 'm-' + month + '-yr');
+      if (!yrBox.value && cloudData['year-label']) yrBox.value = cloudData['year-label'];
       bindField(document.getElementById('month-notes-area'), 'm-' + month + '-notes');
       const cal = document.getElementById('month-calendar-cells');
       cal.innerHTML = ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(function(d) { return '<div class="cal-head">' + d + '</div>'; }).join('');
