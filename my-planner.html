@@ -264,7 +264,7 @@
     <aside class="month-sidebar" id="month-sidebar"></aside>
   </div>
   <script>
-    const DB_URL = 'https://firebaseio.com';
+    const DB_URL = 'https://ccbg-planner-default-rtdb.firebaseio.com/planner.json';
     let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 1, currentExpPage = 1, activeMoodBrush = -1;
     let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
     const monthsList = ['JANUARY|c-pink','FEBRUARY|c-lav','MARCH|c-blue','APRIL|c-mint','MAY|c-yel','JUNE|c-pink-s','JULY|c-lav','AUGUST|c-blue','SEPTEMBER|c-mint','OCTOBER|c-yel','NOVEMBER|c-pink-s','DECEMBER|c-pink'];
@@ -457,10 +457,23 @@
       el.oninput = el.onchange = function() { cloudData[k] = el.type === 'checkbox' ? el.checked : el.value; queueSave(); };
     }
     function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(pushCloud, 600); }
-    async function pushCloud() {
+        async function pushCloud() {
       if (!editPin) return;
-      const res = await fetch(DB_URL, { method: 'PUT', body: JSON.stringify(Object.assign({}, cloudData, { _pin: editPin })) });
-      if (!res.ok) alert('Wrong PIN! Click UNLOCK EDIT and enter 8675309.');
+      try {
+        const res = await fetch(DB_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.assign({}, cloudData, { _pin: editPin }))
+        });
+        if (res.ok) {
+          lockBtn.textContent = 'SAVED ✓';
+          setTimeout(function() { if (editPin) lockBtn.textContent = 'UNLOCKED'; }, 1500);
+        } else {
+          lockBtn.textContent = 'WRONG PIN';
+        }
+      } catch (err) {
+        lockBtn.textContent = 'NET ERROR';
+      }
     }
     async function loadCloud() {
       const res = await fetch(DB_URL); const data = await res.json();
