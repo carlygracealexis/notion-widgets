@@ -16,58 +16,63 @@
     :root {
       --bg: #fdfbff; --grid: #efe6ff; --ink: #35294c; --sh: #8c7aa9;
       --pink: #ff7eb9; --pink-s: #ffb8dc; --lav: #c3b1ff; --blue: #8ecae6;
-      --mint: #8ce99a; --yel: #ffe066; --white: #ffffff;
+      --mint: #8ce99a; --yel: #ffe066; --peach: #ffb07c; --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 8px; background: transparent; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; color: var(--ink); }
+    body { margin: 0; padding: 12px; background: transparent; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; color: var(--ink); }
     .px, .y2k-btn, .m-tab, .win-bar, .tile-btn, .cal-head, .open-pill { font-family: 'PressStartLocal', monospace; letter-spacing: 0.4px; }
     .planner-frame {
-      max-width: 960px; margin: 0 auto; background-color: var(--bg);
+      max-width: 1280px; margin: 0 auto; background-color: var(--bg);
       background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 18px 18px; border: 2.5px solid var(--ink); border-radius: 12px;
-      box-shadow: 5px 5px 0 var(--sh); padding: 14px; display: grid; grid-template-columns: 1fr 48px; gap: 10px; position: relative;
+      background-size: 20px 20px; border: 3px solid var(--ink); border-radius: 14px;
+      box-shadow: 6px 6px 0 var(--sh); padding: 18px; display: grid; grid-template-columns: 1fr 54px; gap: 12px; position: relative;
     }
-    .top-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 6px; }
+    .top-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
     .nav-group { display: flex; flex-wrap: wrap; gap: 6px; }
-    .y2k-btn { font-size: 10px; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 8px 11px; cursor: pointer; }
+    .y2k-btn { font-size: 10px; background: var(--white); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 9px 12px; cursor: pointer; }
     .y2k-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
     .y2k-btn.active { background: var(--pink); color: var(--white); }
-    .month-sidebar { display: flex; flex-direction: column; gap: 4px; }
-    .m-tab { font-size: 9px; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0 var(--ink); padding: 9px 2px; text-align: center; cursor: pointer; user-select: none; }
-    .c-pink { background: var(--pink); } .c-pink-s { background: var(--pink-s); } .c-lav { background: var(--lav); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yel); }
-    .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--sh); margin-bottom: 12px; }
-    .win-bar { padding: 7px 10px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 10px; }
-    .win-icons { display: flex; gap: 3px; align-items: center; }
-    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: var(--white); border: 1.5px solid var(--ink); font-size: 8px; }
+    .month-sidebar { display: flex; flex-direction: column; gap: 5px; }
+    .m-tab { font-size: 9px; color: var(--ink); border: 2px solid var(--ink); border-radius: 0 8px 8px 0; box-shadow: 2px 2px 0 var(--ink); padding: 11px 2px; text-align: center; cursor: pointer; user-select: none; }
+    .c-pink { background: var(--pink); } .c-pink-s { background: var(--pink-s); } .c-lav { background: var(--lav); } .c-blue { background: var(--blue); } .c-mint { background: var(--mint); } .c-yel { background: var(--yel); } .c-peach { background: var(--peach); }
+    .win-box { background: var(--white); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--sh); margin-bottom: 14px; }
+    .win-bar { padding: 8px 12px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; font-size: 10px; }
+    .win-icons { display: flex; gap: 4px; align-items: center; }
+    .win-icons span { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; background: var(--white); border: 1.5px solid var(--ink); font-size: 8px; }
     .open-pill { background: var(--white); border: 1.5px solid var(--ink); padding: 3px 6px; font-size: 8px; cursor: pointer; margin-right: 4px; }
-    .win-content { padding: 12px; }
+    .win-content { padding: 14px; }
     .screen { display: none; } .screen.active { display: block; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-    .tile-btn { font-size: 10px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 16px 8px; text-align: center; cursor: pointer; }
-    input[type="text"], textarea { width: 100%; border: none; border-bottom: 1.5px solid #d8b4fe; padding: 3px 6px; font-family: 'MyHandwriting', cursive; font-size: 22px; color: var(--ink); background: transparent; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 820px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    .tile-btn { font-size: 10px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); padding: 18px 8px; text-align: center; cursor: pointer; }
+    input[type="text"], textarea { width: 100%; border: none; border-bottom: 1.5px solid #d8b4fe; padding: 4px 6px; font-family: 'MyHandwriting', cursive; font-size: 23px; color: var(--ink); background: transparent; }
     textarea { resize: vertical; line-height: 24px; border-bottom: none; }
     .lined { background-image: repeating-linear-gradient(transparent, transparent 23px, #e9d5ff 24px); background-size: 100% 24px; }
     .dotted { background-image: radial-gradient(#c3b1ff 1.3px, transparent 1.3px); background-size: 14px 14px; }
     .gridded { background-image: linear-gradient(#efe6ff 1px, transparent 1px), linear-gradient(90deg, #efe6ff 1px, transparent 1px); background-size: 18px 18px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-    .cal-head { font-size: 9px; text-align: center; padding: 7px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
-    .cal-cell { min-height: 70px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 3px; display: flex; flex-direction: column; }
-    .cal-day-num { width: 28px !important; height: 22px !important; padding: 1px 3px !important; font-size: 18px !important; border: 1.5px solid var(--ink) !important; text-align: center; }
-    .cal-note { padding: 2px !important; font-size: 19px !important; line-height: 19px; min-height: 40px; }
-    .mini-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-size: 11px; }
-    .mini-box { border: 1px solid #cbd5e1; height: 18px; font-size: 14px; padding: 0; text-align: center; }
-    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 3px 0; }
-    .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--pink); flex-shrink: 0; }
+    .cal-head { font-size: 10px; text-align: center; padding: 8px 2px; background: #faf5ff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .cal-cell { min-height: 115px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 4px; display: flex; flex-direction: column; }
+    .cal-day-num { width: 32px !important; height: 24px !important; padding: 1px 3px !important; font-size: 19px !important; border: 1.5px solid var(--ink) !important; text-align: center; }
+    .cal-note { padding: 3px !important; font-size: 20px !important; line-height: 20px; min-height: 78px; }
+    .mini-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center; font-size: 12px; }
+    .mini-box { border: 1.5px solid #cbd5e1; height: 26px; font-size: 16px !important; padding: 0 !important; text-align: center; }
+    .check-item { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e9d5ff; padding: 4px 0; }
+    .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--pink); flex-shrink: 0; }
     .load-bar { display: flex; gap: 2px; max-width: 340px; margin: 12px auto 18px; padding: 3px; border: 2px solid var(--ink); background: var(--white); }
     .load-bar span { flex: 1; height: 11px; }
-    .water-box { width: 26px; height: 32px; border: 2px solid var(--ink); cursor: pointer; background: var(--white); }
+    .water-box { width: 28px; height: 34px; border: 2px solid var(--ink); cursor: pointer; background: var(--white); }
     .water-box.filled { background: var(--blue); }
     .mood-btn { padding: 4px 6px; border: 2px solid transparent; cursor: pointer; background: transparent; border-radius: 6px; }
     .mood-btn.picked { border-color: var(--ink); background: var(--yel); }
+    .mood-key-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border: 2px solid var(--ink); cursor: pointer; font-size: 9px; background: var(--white); }
+    .mood-key-pill.active-brush { box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); }
     .px-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .px-table th, .px-table td { border: 1px solid #cbd5e1; text-align: center; height: 18px; padding: 1px; cursor: pointer; }
+    .px-table th, .px-table td { border: 1.5px solid #cbd5e1; text-align: center; height: 22px; padding: 2px; cursor: pointer; }
+    .habit-check { width: 22px; height: 22px; border: 1.5px solid var(--ink); cursor: pointer; display: inline-block; background: var(--white); }
+    .habit-check.done { background: var(--mint); }
     .sticker-item { font-size: 36px; padding: 12px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--sh); text-align: center; cursor: pointer; background: var(--white); }
     .placed-sticker { position: fixed; font-size: 34px; cursor: move; user-select: none; z-index: 50; filter: drop-shadow(2px 2px 0 #35294c); }
   </style>
@@ -80,6 +85,7 @@
         <button class="y2k-btn active" id="nav-home" onclick="showScreen('home')">HOME</button>
         <button class="y2k-btn" id="nav-year" onclick="showScreen('year')">YEAR</button>
         <button class="y2k-btn" id="nav-extras" onclick="showScreen('extras')">EXTRAS</button>
+        <button class="y2k-btn" id="nav-expenses" onclick="showScreen('expenses')">EXPENSES</button>
         <button class="y2k-btn" id="nav-notes" onclick="showScreen('notes')">NOTES</button>
         <button class="y2k-btn" id="nav-stickers" onclick="showScreen('stickers')">STICKERS</button>
       </div>
@@ -89,22 +95,22 @@
     </header>
     <main>
       <section id="screen-cover" class="screen">
-        <div class="win-box" style="max-width:560px; margin:20px auto;">
+        <div class="win-box" style="max-width:600px; margin:24px auto;">
           <div class="win-bar c-pink"><span>MY_PLANNER.EXE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" style="text-align:center; padding:28px 16px;">
-            <div style="margin-bottom:14px; display:flex; justify-content:center; align-items:center; gap:14px;">
-              <img src="./Kawaii%20icon-%20gameboy.png" style="width:50px; height:50px; object-fit:contain;">
-              <img src="./Y2K_sticker_38.png" style="width:46px; height:46px; object-fit:contain;">
-              <img src="./Y2K_sticker_cd.png" style="width:50px; height:50px; object-fit:contain;">
+          <div class="win-content" style="text-align:center; padding:32px 18px;">
+            <div style="margin-bottom:16px; display:flex; justify-content:center; align-items:center; gap:16px;">
+              <img src="./Kawaii%20icon-%20gameboy.png" style="width:54px; height:54px; object-fit:contain;">
+              <img src="./Y2K_sticker_38.png" style="width:48px; height:48px; object-fit:contain;">
+              <img src="./Y2K_sticker_cd.png" style="width:54px; height:54px; object-fit:contain;">
             </div>
-            <div class="px" style="font-size:24px; line-height:1.45; text-shadow:3px 3px 0 var(--lav);">DIGITAL<br>PLANNER</div>
-            <div class="px" style="font-size:9px; color:#e11d48; margin:12px 0;">* UNDATED * KAWAII Y2K *</div>
+            <div class="px" style="font-size:26px; line-height:1.45; text-shadow:3px 3px 0 var(--lav);">DIGITAL<br>PLANNER</div>
+            <div class="px" style="font-size:10px; color:#e11d48; margin:14px 0;">* UNDATED * KAWAII Y2K *</div>
             <div class="px" style="font-size:8px; text-align:left; max-width:340px; margin:16px auto 4px;">LOADING CUTENESS... 100%</div>
             <div class="load-bar"><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span><span class="c-pink"></span><span class="c-lav"></span><span class="c-blue"></span><span class="c-mint"></span><span class="c-yel"></span></div>
           </div>
         </div>
-        <div style="max-width:420px; margin:16px auto; background:var(--white); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--sh); padding:12px;">
-          <div style="font-size:21px; margin-bottom:4px;">this planner belongs to:</div>
+        <div style="max-width:460px; margin:16px auto; background:var(--white); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--sh); padding:14px;">
+          <div style="font-size:16px; margin-bottom:4px;">this planner belongs to:</div>
           <input type="text" data-p="owner-name" placeholder="Type your name...">
         </div>
         <div style="text-align:center; margin-bottom:16px;"><button class="y2k-btn c-yel" onclick="showScreen('home')">START &gt;</button></div>
@@ -118,27 +124,25 @@
         </div>
         <div class="win-box">
           <div class="win-bar c-blue"><span>SHORTCUTS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content grid-2">
+          <div class="win-content grid-4">
             <div class="tile-btn c-yel" onclick="showScreen('year')">YEAR AT A GLANCE</div>
-            <div class="tile-btn c-mint" onclick="showScreen('extras')">EXTRA TEMPLATES</div>
-            <div class="tile-btn c-lav" onclick="showScreen('notes')">NOTES</div>
-            <div class="tile-btn c-pink" onclick="showScreen('stickers')">STICKER BOOK</div>
+            <div class="tile-btn c-mint" onclick="showScreen('extras')">MOOD &amp; HABITS</div>
+            <div class="tile-btn c-peach" onclick="showScreen('expenses')">EXPENSE LEDGER</div>
+            <div class="tile-btn c-lav" onclick="showScreen('notes')">NOTES &amp; STICKERS</div>
           </div>
         </div>
         <div class="win-box">
           <div class="win-bar c-lav"><span>HOW TO USE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" style="line-height:1.7;">
+          <div class="win-content" style="line-height:1.8;">
             <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> tap the tabs on the right to open each month</div>
-            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> tap the top tabs to go home, to the year, extras or notes</div>
-            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> on a month page, tap WEEK 1-5 to open that week</div>
-            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> on a week page, tap OPEN &gt; on a day bar to open that day</div>
-            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> write the dates yourself - start any day, any year!</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> log purchases in EXPENSES (e.g. 01/15 or Jan 15) — each month auto-displays its own expenses by date!</div>
+            <div><img src="./Y2K_sticker_heart.png" style="width:16px; vertical-align:middle;"> on a month page, tap WEEK 1-5 to open that week, then OPEN &gt; for the daily view</div>
           </div>
         </div>
       </section>
       <section id="screen-year" class="screen">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <h2 class="px" style="margin:0; font-size:17px;">YEAR AT A GLANCE <img src="./Kawaii%20icon-%20sparkles.png" style="width:26px; vertical-align:middle;"></h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h2 class="px" style="margin:0; font-size:18px;">YEAR AT A GLANCE <img src="./Kawaii%20icon-%20sparkles.png" style="width:26px; vertical-align:middle;"></h2>
           <div style="display:flex; align-items:center; gap:6px;"><span class="px" style="font-size:10px;">YEAR:</span><input type="text" data-p="year-label" style="width:110px;"></div>
         </div>
         <div class="grid-3" id="year-grid"></div>
@@ -146,10 +150,10 @@
       <section id="screen-month" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <h2 class="px" id="month-heading" style="margin:0; font-size:18px;">JANUARY</h2>
-            <input type="text" id="month-year-input" placeholder="YEAR:" style="width:90px;">
+            <h2 class="px" id="month-heading" style="margin:0; font-size:19px;">JANUARY</h2>
+            <input type="text" id="month-year-input" placeholder="YEAR:" style="width:95px;">
           </div>
-          <div style="display:flex; gap:4px; flex-wrap:wrap;">
+          <div style="display:flex; gap:5px; flex-wrap:wrap;">
             <button class="y2k-btn c-pink" onclick="openWeek(1)">WEEK 1</button>
             <button class="y2k-btn c-pink" onclick="openWeek(2)">WEEK 2</button>
             <button class="y2k-btn c-pink" onclick="openWeek(3)">WEEK 3</button>
@@ -158,33 +162,34 @@
           </div>
         </div>
         <div class="win-box"><div class="win-bar c-pink" id="month-cal-bar"><span>CALENDAR</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="cal-grid" id="month-calendar-cells"></div></div>
-        <div class="grid-2">
+        <div class="grid-3">
           <div class="win-box"><div class="win-bar c-yel"><span>GOALS</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="month-goals-list"></div></div>
-          <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="month-notes-area" class="dotted" style="min-height:210px;"></textarea></div></div>
+          <div class="win-box"><div class="win-bar c-peach"><span>MONTH EXPENSES</span><div class="win-icons"><button class="open-pill" onclick="showScreen('expenses')">+ ADD</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="month-expense-summary" style="max-height:240px; overflow-y:auto;"></div></div>
+          <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="month-notes-area" class="dotted" style="min-height:220px;"></textarea></div></div>
         </div>
       </section>
       <section id="screen-week" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
-          <div><h2 class="px" id="week-heading" style="margin:0; font-size:17px;">JANUARY</h2><input type="text" id="week-range" placeholder="week 1 - __ / __ - __ / __" style="margin-top:4px; max-width:230px;"></div>
+          <div><h2 class="px" id="week-heading" style="margin:0; font-size:18px;">JANUARY</h2><input type="text" id="week-range" placeholder="week 1 - __ / __ - __ / __" style="margin-top:4px; max-width:250px;"></div>
           <div style="display:flex; gap:6px;"><button class="y2k-btn" onclick="showScreen('month')">&lt; MONTH</button><button class="y2k-btn" onclick="changeWeek(-1)">&lt; PREV</button><button class="y2k-btn" onclick="changeWeek(1)">NEXT &gt;</button></div>
         </div>
         <div class="grid-2" id="week-days-grid"></div>
       </section>
       <section id="screen-day" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
-          <div><h2 class="px" id="day-heading" style="margin:0; font-size:17px;">MONDAY</h2><input type="text" id="day-date-str" placeholder="january - week 1 - __ / __ / __" style="margin-top:4px; max-width:250px;"></div>
+          <div><h2 class="px" id="day-heading" style="margin:0; font-size:18px;">MONDAY</h2><input type="text" id="day-date-str" placeholder="january - week 1 - __ / __ / __" style="margin-top:4px; max-width:270px;"></div>
           <div style="display:flex; gap:6px;"><button class="y2k-btn" onclick="showScreen('week')">&lt; WEEK</button><button class="y2k-btn" onclick="changeDay(-1)">&lt; PREV</button><button class="y2k-btn" onclick="changeDay(1)">NEXT &gt;</button></div>
         </div>
         <div class="grid-2">
-          <div class="win-box"><div class="win-bar c-pink"><span>SCHEDULE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-schedule-list" style="padding:8px;"></div></div>
+          <div class="win-box"><div class="win-bar c-pink"><span>SCHEDULE</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-schedule-list" style="padding:10px;"></div></div>
           <div>
-            <div class="win-box"><div class="win-bar c-pink"><span>TOP 3</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-top3" style="padding:8px;"></div></div>
-            <div class="win-box"><div class="win-bar c-lav"><span>TO DO</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-todo" style="padding:8px;"></div></div>
-            <div class="win-box"><div class="win-bar c-blue"><span>WATER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-water" style="display:flex; gap:5px; justify-content:center;"></div></div>
+            <div class="win-box"><div class="win-bar c-pink"><span>TOP 3</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-top3" style="padding:10px;"></div></div>
+            <div class="win-box"><div class="win-bar c-lav"><span>TO DO</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-todo" style="padding:10px;"></div></div>
+            <div class="win-box"><div class="win-bar c-blue"><span>WATER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-water" style="display:flex; gap:6px; justify-content:center;"></div></div>
             <div class="win-box"><div class="win-bar c-mint"><span>MOOD</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" id="day-mood" style="display:flex; gap:8px; justify-content:center;"></div></div>
           </div>
         </div>
-        <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="day-notes" class="dotted" style="min-height:110px;"></textarea></div></div>
+        <div class="win-box"><div class="win-bar c-lav"><span>NOTES</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content"><textarea id="day-notes" class="dotted" style="min-height:130px;"></textarea></div></div>
       </section>
       <section id="screen-notes" class="screen">
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
@@ -198,18 +203,53 @@
         </div>
         <div class="win-box">
           <div class="win-bar c-lav"><span id="notes-bar-title">LINED.TXT</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content"><textarea id="notes-pad" data-p="note-body" class="lined" style="min-height:380px;"></textarea></div>
+          <div class="win-content"><textarea id="notes-pad" data-p="note-body" class="lined" style="min-height:420px;"></textarea></div>
         </div>
       </section>
       <section id="screen-extras" class="screen">
-        <h2 class="px" style="margin:0 0 10px; font-size:18px;">EXTRAS <img src="./Y2K_sticker_Y2K.png" style="width:32px; vertical-align:middle;"></h2>
+        <h2 class="px" style="margin:0 0 10px; font-size:18px;">MOOD &amp; HABITS <img src="./Y2K_sticker_Y2K.png" style="width:32px; vertical-align:middle;"></h2>
         <div class="win-box">
-          <div class="win-bar c-mint"><span>YEAR IN PIXELS (CLICK SQUARES TO COLOR)</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" style="overflow-x:auto;"><table class="px-table" id="pixels-table"></table></div>
+          <div class="win-bar c-mint"><span>YEAR IN PIXELS — MOOD BOARD</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content">
+            <div id="mood-legend-bar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; align-items:center;"></div>
+            <div style="overflow-x:auto;"><table class="px-table" id="pixels-table"></table></div>
+          </div>
         </div>
         <div class="win-box">
-          <div class="win-bar c-yel"><span>EXPENSE TRACKER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
-          <div class="win-content" id="expense-rows"></div>
+          <div class="win-bar c-lav"><span>MONTHLY HABIT TRACKER</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content" style="overflow-x:auto;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span class="px" style="font-size:9px;">MONTH:</span>
+              <input type="text" data-p="habit-month-label" placeholder="e.g. NOVEMBER" style="max-width:200px;">
+            </div>
+            <table class="px-table" id="habit-table"></table>
+          </div>
+        </div>
+      </section>
+      <section id="screen-expenses" class="screen">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;">
+          <h2 class="px" style="margin:0; font-size:18px;">EXPENSE LEDGER <img src="./Kawaii%20icon-%20gold%20bow.png" style="width:26px; vertical-align:middle;"></h2>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <button class="y2k-btn" onclick="changeExpensePage(-1)">&lt; PREV PAGE</button>
+            <span class="px" id="exp-page-label" style="font-size:10px;">PAGE 1 OF 1</span>
+            <button class="y2k-btn c-peach" onclick="changeExpensePage(1)">NEXT PAGE &gt;</button>
+          </div>
+        </div>
+        <div class="win-box">
+          <div class="win-bar c-yel"><span>ENTER EXPENSES (USE MM/DD OR MON DD — AUTO-LINKS TO EACH MONTH!)</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div>
+          <div class="win-content">
+            <div style="display:grid; grid-template-columns:130px 2fr 1.2fr 130px; gap:8px; margin-bottom:6px; border-bottom:2px solid var(--ink); padding-bottom:4px;">
+              <span class="px" style="font-size:9px;">DATE</span>
+              <span class="px" style="font-size:9px;">ITEM / STORE</span>
+              <span class="px" style="font-size:9px;">CATEGORY</span>
+              <span class="px" style="font-size:9px;">AMOUNT</span>
+            </div>
+            <div id="expense-rows"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; padding-top:8px; border-top:2px solid var(--ink);">
+              <span style="font-size:14px; color:var(--sh);">Tip: When 15 rows fill up, click NEXT PAGE &gt; to continue on a new sheet!</span>
+              <span class="px" id="exp-page-total" style="font-size:11px;">PAGE TOTAL: $0.00</span>
+            </div>
+          </div>
         </div>
       </section>
       <section id="screen-stickers" class="screen">
@@ -225,7 +265,7 @@
   </div>
   <script>
     const DB_URL = 'https://firebaseio.com';
-    let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 1;
+    let currentMonth = 'JANUARY', currentWeek = 1, currentDayIdx = 1, currentExpPage = 1, activeMoodBrush = -1;
     let cloudData = {}, editPin = localStorage.getItem('ccbg-edit-pin') || '', saveTimer = null;
     const monthsList = ['JANUARY|c-pink','FEBRUARY|c-lav','MARCH|c-blue','APRIL|c-mint','MAY|c-yel','JUNE|c-pink-s','JULY|c-lav','AUGUST|c-blue','SEPTEMBER|c-mint','OCTOBER|c-yel','NOVEMBER|c-pink-s','DECEMBER|c-pink'];
     const dayNames = ['SUNDAY|c-pink','MONDAY|c-lav','TUESDAY|c-blue','WEDNESDAY|c-mint','THURSDAY|c-yel','FRIDAY|c-pink-s','SATURDAY|c-lav'];
@@ -234,22 +274,95 @@
       const parts = item.split('|'), m = parts.shift(), col = parts.shift();
       homeGrid.innerHTML += '<div class="tile-btn ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m + '</div>';
       sideBar.innerHTML += '<div class="m-tab ' + col + '" onclick="openMonth(\'' + m + '\',\'' + col + '\')">' + m.slice(0,3) + '</div>';
-      let mini = ['S','M','T','W','T','F','S'].map(function(d) { return '<b style="font-size:10px;">' + d + '</b>'; }).join('');
+      let mini = ['S','M','T','W','T','F','S'].map(function(d) { return '<b style="font-size:11px;">' + d + '</b>'; }).join('');
       for (let c = 1; c <= 35; c++) mini += '<input type="text" class="mini-box" data-p="yr-' + m + '-' + c + '">';
-      yearGrid.innerHTML += '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '" style="cursor:pointer;" onclick="openMonth(\'' + m + '\',\'' + col + '\')"><span>' + m + '</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:6px;"><div class="mini-cal">' + mini + '</div></div></div>';
+      yearGrid.innerHTML += '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '" style="cursor:pointer;" onclick="openMonth(\'' + m + '\',\'' + col + '\')"><span>' + m + '</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><div class="mini-cal">' + mini + '</div></div></div>';
     });
     const lockBtn = document.createElement('button');
     lockBtn.className = 'y2k-btn c-yel';
     lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT';
     lockBtn.onclick = function() { const p = prompt('Enter secret PIN (8675309):', editPin); if (p !== null) { editPin = p.trim(); localStorage.setItem('ccbg-edit-pin', editPin); lockBtn.textContent = editPin ? 'UNLOCKED' : 'UNLOCK EDIT'; pushCloud(); } };
     document.getElementById('right-nav-tools').appendChild(lockBtn);
-    const pxColors = ['','#ff7eb9','#ffe066','#8ce99a','#8ecae6','#c3b1ff','#e2e8f0'];
+    const moodItems = ['CLEAR|#ffffff','CONTENT|#ff7eb9','THANKFUL|#ffe066','ANNOYED|#c3b1ff','SAD|#8ecae6','HANGRY|#ffb07c','CHILL|#8ce99a'];
+    const legendBar = document.getElementById('mood-legend-bar');
+    legendBar.innerHTML = '<span class="px" style="font-size:9px;">PICK BRUSH:</span>';
+    moodItems.forEach(function(item, idx) {
+      const parts = item.split('|'), label = parts.shift(), hex = parts.shift();
+      const pill = document.createElement('button');
+      pill.className = 'mood-key-pill px';
+      pill.id = 'mbrush-' + idx;
+      pill.innerHTML = '<span style="display:inline-block; width:14px; height:14px; border:1.5px solid #35294c; background:' + hex + ';"></span>' + label;
+      pill.onclick = function() { activeMoodBrush = (activeMoodBrush === idx) ? -1 : idx; moodItems.forEach(function(_, i) { document.getElementById('mbrush-' + i).classList.toggle('active-brush', activeMoodBrush === i); }); };
+      legendBar.appendChild(pill);
+    });
     const pxt = document.getElementById('pixels-table');
     pxt.innerHTML = '<tr><th>#</th>' + monthsList.map(function(x) { return '<th>' + x.split('|').shift().slice(0,3) + '</th>'; }).join('') + '</tr>';
-    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x.split('|').shift() + '-' + d + '" onclick="cyclePx(this)"></td>'; }).join('') + '</tr>';
-    function cyclePx(td) { const k = td.dataset.px; const n = ((cloudData[k] || 0) + 1) % pxColors.length; cloudData[k] = n; td.style.background = pxColors[n]; queueSave(); }
-    const expDiv = document.getElementById('expense-rows');
-    for (let r = 1; r <= 8; r++) expDiv.innerHTML += '<div style="display:grid; grid-template-columns:1fr 2fr 1fr 1fr; gap:6px; margin-bottom:4px;"><input type="text" data-p="ex-d-' + r + '" placeholder="DATE"><input type="text" data-p="ex-i-' + r + '" placeholder="ITEM"><input type="text" data-p="ex-c-' + r + '" placeholder="CATEGORY"><input type="text" data-p="ex-a-' + r + '" placeholder="$0.00"></div>';
+    for (let d = 1; d <= 31; d++) pxt.innerHTML += '<tr><td>' + d + '</td>' + monthsList.map(function(x) { return '<td data-px="px-' + x.split('|').shift() + '-' + d + '" onclick="paintPx(this)"></td>'; }).join('') + '</tr>';
+    function paintPx(td) { const k = td.dataset.px; const n = activeMoodBrush >= 0 ? activeMoodBrush : (((cloudData[k] || 0) + 1) % moodItems.length); cloudData[k] = n; td.style.background = moodItems.slice(n, n + 1).shift().split('|').pop(); queueSave(); }
+    const ht = document.getElementById('habit-table');
+    let hHead = '<tr><th style="min-width:170px;">HABIT</th>';
+    for (let d = 1; d <= 31; d++) hHead += '<th>' + d + '</th>';
+    ht.innerHTML = hHead + '</tr>';
+    for (let h = 1; h <= 10; h++) {
+      let row = '<tr><td><input type="text" data-p="hab-name-' + h + '" placeholder="Habit ' + h + '..." style="font-size:19px;"></td>';
+      for (let d = 1; d <= 31; d++) row += '<td data-hab="hab-' + h + '-' + d + '" onclick="toggleHab(this)"></td>';
+      ht.innerHTML += row + '</tr>';
+    }
+    function toggleHab(td) { const k = td.dataset.hab; cloudData[k] = !cloudData[k]; td.style.background = cloudData[k] ? '#8ce99a' : ''; queueSave(); }
+    function renderExpensePage(pg) {
+      currentExpPage = Math.max(1, pg);
+      const totalPages = Math.max(currentExpPage, Number(cloudData._expPages || 1));
+      if (currentExpPage > Number(cloudData._expPages || 1)) { cloudData._expPages = currentExpPage; queueSave(); }
+      document.getElementById('exp-page-label').textContent = 'PAGE ' + currentExpPage + ' OF ' + totalPages;
+      const expDiv = document.getElementById('expense-rows'); expDiv.innerHTML = '';
+      for (let r = 1; r <= 15; r++) {
+        const keyBase = 'exp-p' + currentExpPage + '-r' + r;
+        expDiv.innerHTML += '<div style="display:grid; grid-template-columns:130px 2fr 1.2fr 130px; gap:8px; margin-bottom:5px;"><input type="text" id="ed-' + r + '" placeholder="MM/DD"><input type="text" id="ei-' + r + '" placeholder="Item or store..."><input type="text" id="ec-' + r + '" placeholder="Category"><input type="text" id="ea-' + r + '" placeholder="$0.00"></div>';
+      }
+      for (let r = 1; r <= 15; r++) {
+        const keyBase = 'exp-p' + currentExpPage + '-r' + r;
+        ['ed','ei','ec','ea'].forEach(function(colId, ci) {
+          const field = ['d','i','c','a'].slice(ci, ci + 1).shift();
+          const el = document.getElementById(colId + '-' + r);
+          bindField(el, keyBase + '-' + field);
+          el.addEventListener('input', function() { updateExpTotals(); renderMonthExpenses(currentMonth); });
+        });
+      }
+      updateExpTotals();
+    }
+    function changeExpensePage(delta) { renderExpensePage(currentExpPage + delta); }
+    function parseAmt(str) { return parseFloat(String(str || '').replace(/[^0-9.-]/g, '')) || 0; }
+    function updateExpTotals() {
+      let sum = 0;
+      for (let r = 1; r <= 15; r++) sum += parseAmt(cloudData['exp-p' + currentExpPage + '-r' + r + '-a']);
+      document.getElementById('exp-page-total').textContent = 'PAGE TOTAL: $' + sum.toFixed(2);
+    }
+    function getMonthIndexFromDate(dtStr) {
+      const s = String(dtStr || '').trim().toLowerCase();
+      if (!s) return -1;
+      const mNames = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+      for (let i = 0; i < 12; i++) if (s.indexOf(mNames.slice(i, i + 1).shift()) !== -1) return i;
+      const numMatch = s.match(/^0?([1-9]|1[0-2])[\/\-]/);
+      return numMatch ? (parseInt(numMatch.pop(), 10) - 1) : -1;
+    }
+    function renderMonthExpenses(monthName) {
+      const box = document.getElementById('month-expense-summary');
+      if (!box) return;
+      const targetIdx = monthsList.findIndex(function(x) { return x.split('|').shift() === monthName; });
+      const pages = Number(cloudData._expPages || 1);
+      const matches = [];
+      for (let p = 1; p <= pages; p++) {
+        for (let r = 1; r <= 15; r++) {
+          const base = 'exp-p' + p + '-r' + r;
+          const d = cloudData[base + '-d'], it = cloudData[base + '-i'], cat = cloudData[base + '-c'], amt = cloudData[base + '-a'];
+          if ((d || it || amt) && getMonthIndexFromDate(d) === targetIdx) matches.push({ d: d || '', it: it || '(item)', cat: cat || '', amt: parseAmt(amt) });
+        }
+      }
+      matches.sort(function(a, b) { return a.d.localeCompare(b.d); });
+      if (!matches.length) { box.innerHTML = '<div style="color:var(--sh); font-size:15px;">No expenses logged for ' + monthName + ' yet. Click + ADD to log items with ' + String(targetIdx + 1).padStart(2, '0') + '/DD!</div>'; return; }
+      let total = 0;
+      box.innerHTML = matches.map(function(m) { total += m.amt; return '<div class="check-item" style="justify-content:space-between; font-size:19px;"><span><b>' + m.d + '</b> ' + m.it + (m.cat ? ' (' + m.cat + ')' : '') + '</span><span>$' + m.amt.toFixed(2) + '</span></div>'; }).join('') + '<div class="px" style="font-size:10px; text-align:right; margin-top:8px;">TOTAL: $' + total.toFixed(2) + '</div>';
+    }
     const myIcons = ['Kawaii Folder- blue.png','Kawaii Folder- blush.png','Kawaii Folder- mocha.png','Kawaii Folder- orange.png','Kawaii Folder- vanilla.png','Kawaii icon- blsh notebook.png','Kawaii icon- blue bow.png','Kawaii icon- blue notebook.png','Kawaii icon- bubble tea.png','Kawaii icon- dk blue bow.png','Kawaii icon- dk navy bow.png','Kawaii icon- drk blue notebook.png','Kawaii icon- emerald bow.png','Kawaii icon- flower.png','Kawaii icon- gameboy.png','Kawaii icon- gold bow.png','Kawaii icon- grape bubble tea.png','Kawaii icon- green bow.png','Kawaii icon- green notebook.png','Kawaii icon- purple bow.png','Kawaii icon- sparkles.png','Kawaii icon- strawberrybubble tea.png','Y2K_sticker_22.png','Y2K_sticker_27.png','Y2K_sticker_30.png','Y2K_sticker_33.png','Y2K_sticker_38.png','Y2K_sticker_39.png','Y2K_sticker_40.png','Y2K_sticker_47.png','Y2K_sticker_camera.png','Y2K_sticker_casette.png','Y2K_sticker_cd.png','Y2K_sticker_flip_phone.png','Y2K_sticker_gaming_headset.png','Y2K_sticker_GIRL.png','Y2K_sticker_heart.png','Y2K_sticker_kawaii.png','Y2K_sticker_panda.png','Y2K_sticker_penguin.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_super_cute.png','Y2K_sticker_Y2K.png'];
     const sGrid = document.getElementById('sticker-grid');
     myIcons.forEach(function(f) { const tag = '<img src="./' + encodeURI(f) + '" style="width:52px; height:52px; object-fit:contain; pointer-events:none;">'; const d = document.createElement('div'); d.className = 'sticker-item'; d.innerHTML = tag; d.onclick = function() { addSticker(tag, 140, 140, true); }; sGrid.appendChild(d); });
@@ -284,12 +397,13 @@
       const goals = document.getElementById('month-goals-list'); goals.innerHTML = '';
       for (let g = 1; g <= 7; g++) goals.innerHTML += '<div class="check-item"><input type="checkbox" id="mgc-' + g + '"><input type="text" id="mgt-' + g + '"></div>';
       for (let g = 1; g <= 7; g++) { bindField(document.getElementById('mgc-' + g), 'm-' + month + '-gc-' + g); bindField(document.getElementById('mgt-' + g), 'm-' + month + '-gt-' + g); }
+      renderMonthExpenses(month);
     }
-        function openWeek(wk) {
+    function openWeek(wk) {
       currentWeek = wk; showScreen('week');
       document.getElementById('week-heading').innerHTML = currentMonth + ' <img src="./Kawaii%20icon-%20purple%20bow.png" style="width:24px; vertical-align:middle;">';
       const r = document.getElementById('week-range'); r.placeholder = 'week ' + wk + ' - __ / __ - __ / __'; bindField(r, 'w-' + currentMonth + '-' + wk + '-rng');
-      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const parts = item.split('|'), d = parts.shift(), col = parts.shift(); return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;"><textarea id="wk-' + d + '" class="lined" style="min-height:120px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:8px;" id="tw-list"></div></div>';
+      document.getElementById('week-days-grid').innerHTML = dayNames.map(function(item, idx) { const parts = item.split('|'), d = parts.shift(), col = parts.shift(); return '<div class="win-box" style="margin-bottom:0;"><div class="win-bar ' + col + '"><span>' + d + ' __/__</span><div class="win-icons"><button class="open-pill" onclick="openDay(' + idx + ')">OPEN &gt;</button><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:10px;"><textarea id="wk-' + d + '" class="lined" style="min-height:140px;"></textarea></div></div>'; }).join('') + '<div class="win-box" style="margin-bottom:0;"><div class="win-bar c-yel"><span>THIS WEEK</span><div class="win-icons"><span>_</span><span>&#9633;</span><span>&times;</span></div></div><div class="win-content" style="padding:10px;" id="tw-list"></div></div>';
       dayNames.forEach(function(item) { const d = item.split('|').shift(); bindField(document.getElementById('wk-' + d), 'w-' + currentMonth + '-' + wk + '-' + d); });
       const tw = document.getElementById('tw-list');
       for (let i = 1; i <= 5; i++) tw.innerHTML += '<div class="check-item"><input type="checkbox" id="twc-' + i + '"><input type="text" id="twt-' + i + '"></div>';
@@ -316,6 +430,29 @@
       ['Y2K_sticker_38.png','Kawaii%20icon-%20sparkles.png','Kawaii%20icon-%20flower.png','Y2K_sticker_RAINBOW.png','Y2K_sticker_47.png'].forEach(function(u, mi) { const btn = document.createElement('button'); btn.className = 'mood-btn' + (cloudData[p + '-mood'] === mi ? ' picked' : ''); btn.innerHTML = '<img src="./' + u + '" style="width:26px;">'; btn.onclick = function() { cloudData[p + '-mood'] = mi; openDay(idx); queueSave(); }; md.appendChild(btn); });
       bindField(document.getElementById('day-notes'), p + '-notes');
     }
+    function changeDay(delta) { currentDayIdx = (currentDayIdx + delta + 7) % 7; openDay(currentDayIdx); }
+    function bindField(el, k) {
+      el.dataset.ckey = k; const v = cloudData[k];
+      if (el.type === 'checkbox') el.checked = v === true; else el.value = v || '';
+      el.oninput = el.onchange = function() { cloudData[k] = el.type === 'checkbox' ? el.checked : el.value; queueSave(); };
+    }
+    function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(pushCloud, 600); }
+    async function pushCloud() {
+      if (!editPin) return;
+      const res = await fetch(DB_URL, { method: 'PUT', body: JSON.stringify(Object.assign({}, cloudData, { _pin: editPin })) });
+      if (!res.ok) alert('Wrong PIN! Click UNLOCK EDIT and enter 8675309.');
+    }
+    async function loadCloud() {
+      const res = await fetch(DB_URL); const data = await res.json();
+      if (data) {
+        cloudData = data;
+        document.querySelectorAll('[data-ckey]').forEach(function(el) { bindField(el, el.dataset.ckey); });
+        document.querySelectorAll('[data-px]').forEach(function(td) { const idx = cloudData[td.dataset.px] || 0; td.style.background = moodItems.slice(idx, idx + 1).shift().split('|').pop(); });
+        document.querySelectorAll('[data-hab]').forEach(function(td) { td.style.background = cloudData[td.dataset.hab] ? '#8ce99a' : ''; });
+        if (Array.isArray(cloudData._stickers)) cloudData._stickers.forEach(function(st) { addSticker(st.h, st.x, st.y, false); });
+        renderExpensePage(currentExpPage); renderMonthExpenses(currentMonth);
+      }
+    }
     function goToday() {
       const now = new Date();
       const parts = monthsList.slice(now.getMonth(), now.getMonth() + 1).shift().split('|');
@@ -324,7 +461,7 @@
       openDay(now.getDay());
     }
     document.querySelectorAll('[data-p]').forEach(function(el) { bindField(el, el.dataset.p); });
-    openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(1); showScreen('cover'); loadCloud();
+    renderExpensePage(1); openMonth('JANUARY', 'c-pink'); openWeek(1); openDay(1); showScreen('cover'); loadCloud();
   </script>
 </body>
 </html>
